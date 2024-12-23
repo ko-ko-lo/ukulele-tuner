@@ -1,4 +1,5 @@
 import * as Tone from "tone";
+import "./styles/variables.scss";
 
 function App() {
   const playNote = () => {

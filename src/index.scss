@@ -1,0 +1,10 @@
+@use "./styles/variables" as vars;
+
+body {
+  font-family: vars.$font-primary;
+  font-weight: vars.$font-weight-regular;
+  color: vars.$text-color;
+  background-color: vars.$background-color;
+  margin: 0;
+  padding: 0;
+}
