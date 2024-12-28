@@ -1,5 +1,9 @@
 @use "./styles/variables" as vars;
 
+html {
+  font-size: 16px; // 1rem = 16px
+}
+
 body {
   font-family: vars.$font-primary;
   font-weight: vars.$font-weight-regular;
@@ -7,4 +11,133 @@ body {
   background-color: vars.$background-color;
   margin: 0;
   padding: 0;
+}
+
+// ========================================================================
+// Margin
+// ========================================================================
+.margin-top {
+  &16 {
+    margin-top: vars.$spacing-unit-large * 2;
+  }
+  &24 {
+    margin-top: vars.$spacing-unit-large * 3;
+  }
+  &32 {
+    margin-top: vars.$spacing-unit-large * 4;
+  }
+  &40 {
+    margin-top: vars.$spacing-unit-large * 5;
+  }
+  &80 {
+    margin-top: vars.$spacing-unit-large * 10;
+  }
+}
+
+.margin-bottom {
+  &16 {
+    margin-bottom: vars.$spacing-unit-large * 2;
+  }
+  &24 {
+    margin-bottom: vars.$spacing-unit-large * 3;
+  }
+  &32 {
+    margin-bottom: vars.$spacing-unit-large * 4;
+  }
+  &40 {
+    margin-bottom: vars.$spacing-unit-large * 5;
+  }
+  &80 {
+    margin-bottom: vars.$spacing-unit-large * 10;
+  }
+}
+
+// ========================================================================
+// Padding
+// ========================================================================
+.padding-top {
+  &16 {
+    padding-top: vars.$spacing-unit-large * 2;
+  }
+  &24 {
+    padding-top: vars.$spacing-unit-large * 3;
+  }
+  &32 {
+    padding-top: vars.$spacing-unit-large * 4;
+  }
+  &40 {
+    padding-top: vars.$spacing-unit-large * 5;
+  }
+  &80 {
+    padding-top: vars.$spacing-unit-large * 10;
+  }
+}
+
+.padding-bottom {
+  &16 {
+    padding-bottom: vars.$spacing-unit-large * 2;
+  }
+  &24 {
+    padding-bottom: vars.$spacing-unit-large * 3;
+  }
+  &32 {
+    padding-bottom: vars.$spacing-unit-large * 4;
+  }
+  &40 {
+    padding-bottom: vars.$spacing-unit-large * 5;
+  }
+  &80 {
+    padding-bottom: vars.$spacing-unit-large * 10;
+  }
+}
+
+// ========================================================================
+// Typography
+// ========================================================================
+h1,
+h2,
+h3 {
+  font-weight: vars.$font-weight-bold;
+}
+
+h1 {
+  font-size: vars.$font-size-40;
+}
+
+h2 {
+  font-size: vars.$font-size-32;
+}
+
+h3 {
+  font-size: vars.$font-size-24;
+}
+
+p {
+  font-size: vars.$font-size-16;
+}
+
+// ========================================================================
+// Button
+// ========================================================================
+
+button {
+  font-family: vars.$font-primary;
+  font-weight: vars.$font-weight-semiBold;
+  font-size: vars.$font-size-16;
+  padding: vars.$spacing-unit-small * 7 vars.$spacing-unit-large * 4;
+  background-color: vars.$sky-blue-300;
+  color: vars.$background-color;
+  border: none;
+  border-radius: vars.$radius-s;
+  cursor: pointer;
+  box-shadow: vars.$elevation-xs;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: vars.$sky-blue-200;
+  }
+
+  &:focus {
+    outline: 2px solid vars.$sky-blue-50;
+  }
 }

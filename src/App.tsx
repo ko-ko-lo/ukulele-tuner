@@ -11,12 +11,7 @@ function App() {
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Ukulele Tuner</h1>
       <p>Click the button to play a test sound using Tone.js!</p>
-      <button
-        onClick={playNote}
-        style={{ padding: "10px 20px", fontSize: "16px" }}
-      >
-        Play Test Note
-      </button>
+      <button onClick={playNote}>Play Test Note</button>
     </div>
   );
 }

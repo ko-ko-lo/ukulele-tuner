@@ -1,6 +1,7 @@
 @import "@fontsource/comfortaa/400.css";
 @import "@fontsource/comfortaa/500.css";
 @import "@fontsource/comfortaa/600.css";
+@import "@fontsource/comfortaa/700.css";
 
 // ========================================================================
 // Colors
@@ -61,22 +62,43 @@ $font-primary: "Comfortaa", sans-serif;
 // Font Weights
 $font-weight-regular: 400;
 $font-weight-medium: 500;
-$font-weight-bold: 600;
+$font-weight-semiBold: 600;
+$font-weight-bold: 700;
 
 //Line Height
 $lineheight-s: 1.2;
 $lineheight-m: 1.5;
 
+// Font Sizes in rem
+$font-size-12: 0.75rem;
+$font-size-16: 1rem;
+$font-size-20: 1.25rem;
+$font-size-24: 1.5rem;
+$font-size-32: 2rem;
+$font-size-40: 2.5rem;
+
+// ========================================================================
+// Elevation
+// ========================================================================
+$elevation-xs: 0 2px 4px 0 rgba(232, 246, 251, 0.16);
+
 // ========================================================================
 // Spacing
 // ========================================================================
-$spacing-unit-large: 0.44rem; // 8px
-$spacing-unit-small: 0.111rem; // 2px
+$spacing-unit-large: 0.5rem; // 8px
+$spacing-unit-small: 0.125rem; // 2px
 
 // Responsive Spacing
 $global-pd-desktop: $spacing-unit-large * 12;
 $global-pd-tablet: $spacing-unit-large * 3;
 $global-pd-mobile: $spacing-unit-large * 2;
+
+// ========================================================================
+// Radius
+// ========================================================================
+$radius-s: $spacing-unit-small * 2;
+$radius-m: $spacing-unit-large;
+$radius-l: $spacing-unit-small * 6;
 
 // ========================================================================
 // Breakpoints
