@@ -191,8 +191,10 @@ img {
 // Responsive Design
 // ========================================================================
 @media (max-width: vars.$breakpoint-tablet) {
-  nav {
+  nav,
+  header {
     flex-wrap: wrap;
+    gap: vars.$spacing-unit-large;
   }
 
   html {
@@ -201,8 +203,12 @@ img {
 }
 
 @media (max-width: vars.$breakpoint-mobile) {
+  html {
+    padding: 0 vars.$global-pd-mobile;
+  }
+
   header img {
-    max-height: vars.$spacing-unit-large * 4;
+    max-height: vars.$spacing-unit-large * 5;
   }
 
   nav a {
