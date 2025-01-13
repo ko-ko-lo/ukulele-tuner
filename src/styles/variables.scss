@@ -1,0 +1,104 @@
+// ========================================================================
+// Colors
+// ========================================================================
+
+// Sky Blue
+$sky-blue-50: #f3fafd;
+$sky-blue-100: #e8f6fb;
+$sky-blue-200: #ceecf7;
+$sky-blue-300: #b8e3f3;
+$sky-blue-400: #9fd8ef;
+$sky-blue-500: #87ceeb;
+$sky-blue-600: #46b5e0;
+$sky-blue-700: #1f93c0;
+$sky-blue-800: #14617f;
+$sky-blue-900: #0c3242;
+$sky-blue-950: #05171f;
+
+// Sandy Beige
+$sandy-beige-50: #fef7f1;
+$sandy-beige-100: #fdecde;
+$sandy-beige-200: #fbdcc1;
+$sandy-beige-300: #f9c99f;
+$sandy-beige-400: #f6b67e;
+$sandy-beige-500: #f4a461;
+$sandy-beige-600: #f0801e;
+$sandy-beige-700: #bf600e;
+$sandy-beige-800: #81410a;
+$sandy-beige-900: #3e1f04;
+$sandy-beige-950: #211102;
+
+// Soft Pink
+$soft-pink-50: #fffafb;
+$soft-pink-100: #fef1f2;
+$soft-pink-200: #ffe0e5;
+$soft-pink-300: #ffd1d8;
+$soft-pink-400: #ffc7cf;
+$soft-pink-500: #ffb6c0;
+$soft-pink-600: #ff617a;
+$soft-pink-700: #ff042b;
+$soft-pink-800: #ad001b;
+$soft-pink-900: #57000d;
+$soft-pink-950: #2e0007;
+
+// Semantic Colors
+$background-color: #121c24;
+$text-color: #e8f6fb;
+$heading-color: #ffb6c1;
+$link-color: #87ceeb;
+
+// ========================================================================
+// Typography
+// ========================================================================
+
+// Font
+$font-primary: "Comfortaa", sans-serif;
+
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semiBold: 600;
+$font-weight-bold: 700;
+
+//Line Height
+$lineheight-s: 1.2;
+$lineheight-m: 1.5;
+
+// Font Sizes in rem
+$font-size-12: 0.75rem;
+$font-size-16: 1rem;
+$font-size-20: 1.25rem;
+$font-size-24: 1.5rem;
+$font-size-32: 2rem;
+$font-size-40: 2.5rem;
+
+// ========================================================================
+// Elevation
+// ========================================================================
+$elevation-xs: 0 2px 4px 0 rgba(232, 246, 251, 0.16);
+
+// ========================================================================
+// Spacing
+// ========================================================================
+$spacing-unit-large: 0.5rem; // 8px
+$spacing-unit-small: 0.125rem; // 2px
+
+// Responsive Spacing
+$global-pd-desktop: $spacing-unit-large * 12;
+$global-pd-tablet: $spacing-unit-large * 3;
+$global-pd-mobile: $spacing-unit-large * 2;
+
+// ========================================================================
+// Radius
+// ========================================================================
+$radius-s: $spacing-unit-small * 2;
+$radius-m: $spacing-unit-large;
+$radius-l: $spacing-unit-small * 6;
+$radius-full: $spacing-unit-large * 999;
+
+// ========================================================================
+// Breakpoints
+// ========================================================================
+$breakpoint-mobile: 490px;
+$breakpoint-tablet: 890px;
+$max-width: 1440px;
