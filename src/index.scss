@@ -1,5 +1,10 @@
 @use "./styles/variables" as vars;
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 16px; // 1rem = 16px
   max-width: vars.$max-width;
@@ -11,8 +16,6 @@ body {
   font-weight: vars.$font-weight-regular;
   color: vars.$text-color;
   background-color: vars.$background-color;
-  margin: 0;
-  padding: 0;
 }
 
 // ========================================================================
@@ -99,11 +102,15 @@ body {
 h1,
 h2,
 h3 {
-  font-weight: vars.$font-weight-bold;
+  font-weight: vars.$font-weight-semiBold;
+  color: vars.$sandy-beige-100;
 }
 
 h1 {
   font-size: vars.$font-size-40;
+  text-align: center;
+  padding-top: vars.$spacing-unit-large * 7;
+  margin: 0;
 }
 
 h2 {
@@ -138,10 +145,26 @@ button {
   &:hover {
     background-color: vars.$sky-blue-200;
   }
-
+  /*
   &:focus {
     outline: 2px solid vars.$sky-blue-50;
   }
+  */
+}
+
+button#secondary {
+  background-color: transparent;
+  box-shadow: none;
+  color: vars.$text-color;
+  width: 100%;
+  margin: vars.$spacing-unit-large * 4 auto 0;
+  font-weight: vars.$font-weight-medium;
+  padding: 0;
+}
+
+.arrow-icon {
+  margin-left: vars.$spacing-unit-large;
+  vertical-align: middle;
 }
 
 // ========================================================================
@@ -188,17 +211,98 @@ img {
 }
 
 // ========================================================================
+// Modal for Tuning Options
+// ========================================================================
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 23, 31, 0.8); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: vars.$sky-blue-900;
+  padding: vars.$spacing-unit-large * 10 vars.$spacing-unit-large * 15
+    vars.$spacing-unit-large * 15;
+  border-radius: vars.$radius-m;
+  position: relative;
+  max-width: 452px;
+}
+
+.modal-close {
+  position: absolute;
+  top: vars.$spacing-unit-large;
+  right: vars.$spacing-unit-large;
+  background: none;
+  border: none;
+  font-size: vars.$spacing-unit-large * 4;
+  cursor: pointer;
+  color: vars.$sky-blue-300;
+}
+
+.modal-close:hover {
+  color: vars.$sky-blue-500;
+}
+
+button.modal-close:hover {
+  background-color: transparent;
+}
+
+button.modal-close {
+  box-shadow: none;
+}
+
+// ========================================================================
+// List
+// ========================================================================
+ul {
+  list-style-type: none;
+  text-align: center;
+  padding-left: 0;
+}
+
+ul li {
+  padding-bottom: vars.$spacing-unit-large * 5;
+}
+
+ul li:last-child {
+  padding-bottom: 0;
+}
+
+ul li p {
+  letter-spacing: 1px;
+}
+
+ul h3 {
+  padding-bottom: vars.$spacing-unit-large;
+}
+
+// ========================================================================
 // Responsive Design
 // ========================================================================
 @media (max-width: vars.$breakpoint-tablet) {
   nav,
   header {
     flex-wrap: wrap;
+  }
+
+  header {
     gap: vars.$spacing-unit-large;
   }
 
   html {
     padding: 0 vars.$global-pd-tablet;
+  }
+
+  h1 {
+    font-size: vars.$font-size-32;
+    padding-top: vars.$spacing-unit-large * 6;
   }
 }
 
@@ -214,5 +318,10 @@ img {
   nav a {
     font-size: vars.$spacing-unit-small * 6;
     padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
+  }
+
+  h1 {
+    font-size: vars.$font-size-24;
+    line-height: 1.5;
   }
 }
