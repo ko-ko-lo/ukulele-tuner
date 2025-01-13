@@ -2,6 +2,8 @@
 
 html {
   font-size: 16px; // 1rem = 16px
+  max-width: vars.$max-width;
+  padding: 0 vars.$global-pd-desktop;
 }
 
 body {
@@ -139,5 +141,72 @@ button {
 
   &:focus {
     outline: 2px solid vars.$sky-blue-50;
+  }
+}
+
+// ========================================================================
+// Header
+// ========================================================================
+nav {
+  background-color: rgba(135, 206, 235, 0.2);
+  border-radius: vars.$radius-full;
+  justify-content: right;
+  display: inline-flex;
+}
+
+nav a {
+  color: vars.$text-color;
+  text-decoration: none;
+  padding: vars.$spacing-unit-large vars.$spacing-unit-large * 3;
+  font-size: vars.$spacing-unit-small * 7;
+}
+
+nav a.active {
+  color: vars.$background-color;
+  background-color: vars.$sky-blue-500;
+  border-radius: vars.$radius-full;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: vars.$spacing-unit-large * 3 0;
+}
+
+header img {
+  max-height: vars.$spacing-unit-large * 7;
+}
+
+// ========================================================================
+// Image
+// ========================================================================
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ========================================================================
+// Responsive Design
+// ========================================================================
+@media (max-width: vars.$breakpoint-tablet) {
+  nav {
+    flex-wrap: wrap;
+  }
+
+  html {
+    padding: 0 vars.$global-pd-tablet;
+  }
+}
+
+@media (max-width: vars.$breakpoint-mobile) {
+  header img {
+    max-height: vars.$spacing-unit-large * 4;
+  }
+
+  nav a {
+    font-size: vars.$spacing-unit-small * 6;
+    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
   }
 }
