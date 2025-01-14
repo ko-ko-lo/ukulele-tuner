@@ -141,7 +141,8 @@ img {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(5, 23, 31, 0.8); /* Semi-transparent background */
+  background-color: rgba(5, 23, 31, 0.9);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,11 +160,12 @@ img {
 
 .modal-close {
   position: absolute;
-  top: vars.$spacing-unit-large;
-  right: vars.$spacing-unit-large;
+  top: vars.$spacing-unit-small * 3;
+  right: vars.$spacing-unit-small * 3;
   background: none;
   border: none;
   font-size: vars.$spacing-unit-large * 4;
+  font-weight: vars.$font-weight-regular;
   cursor: pointer;
   color: vars.$sky-blue-300;
 }
@@ -240,7 +242,7 @@ ul {
 
       &.active::before,
       &.active::after {
-        background-color: vars.$success-color;
+        background-color: rgba(118, 200, 147, 0.6);
       }
 
       &::before {
@@ -342,5 +344,15 @@ ul {
 
   .manual-tuner {
     margin-top: vars.$spacing-unit-large * 6;
+  }
+
+  .modal-content {
+    padding: vars.$spacing-unit-large * 8 vars.$spacing-unit-large * 5
+      vars.$spacing-unit-large * 8;
+  }
+
+  .modal-close {
+    top: 0;
+    right: 0;
   }
 }
