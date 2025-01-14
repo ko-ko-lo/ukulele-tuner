@@ -317,4 +317,30 @@ ul {
     font-size: vars.$font-size-24;
     line-height: 1.5;
   }
+
+  .manual-tuner .tone-lines .tone-line .tone-button {
+    font-size: vars.$spacing-unit-large * 4;
+    padding: vars.$spacing-unit-small * 9 vars.$spacing-unit-large * 2;
+  }
+
+  .manual-tuner .tone-lines {
+    gap: vars.$spacing-unit-large * 4;
+  }
+
+  .manual-tuner .tone-lines .tone-line::before,
+  .manual-tuner .tone-lines .tone-line::after {
+    width: 2px;
+  }
+
+  .manual-tuner .tone-lines .tone-line::before {
+    height: vars.$spacing-unit-large * 6;
+  }
+
+  .manual-tuner .tone-lines .tone-line::after {
+    height: vars.$spacing-unit-large * 16;
+  }
+
+  .manual-tuner {
+    margin-top: vars.$spacing-unit-large * 6;
+  }
 }
