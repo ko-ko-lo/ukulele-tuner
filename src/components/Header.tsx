@@ -6,7 +6,9 @@ const Header: React.FC = () => {
   // React.FC means "React Functional Component"
   return (
     <header>
-      <img src="./logo-aloha.svg" alt="" />
+      <NavLink to="/">
+        <img src="./logo-aloha.svg" alt="" />
+      </NavLink>
       <nav>
         <NavLink
           to="/"

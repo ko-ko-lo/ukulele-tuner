@@ -1,11 +1,34 @@
 import { useState } from "react";
+import * as Tone from "tone";
 import Modal from "../components/Modal";
 import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
 
+const notes = [
+  { name: "G", frequency: "G4" },
+  { name: "C", frequency: "C4" },
+  { name: "E", frequency: "E4" },
+  { name: "A", frequency: "A4" },
+];
+
 const ManualTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeNote, setActiveNote] = useState<string | null>(null);
+
+  const playNote = async (frequency: string) => {
+    setActiveNote(frequency);
+    const synth = new Tone.Synth().toDestination();
+
+    // Ensure the audio context is started
+    await Tone.start();
+
+    // Trigger the note for 1 second
+    synth.triggerAttackRelease(frequency, "1s");
+
+    // Reset active note after the sound finishes
+    setTimeout(() => setActiveNote(null), 1000);
+  };
 
   return (
     <div>
@@ -36,6 +59,28 @@ const ManualTuner = () => {
           ))}
         </ul>
       </Modal>
+
+      <div className="manual-tuner">
+        <div className="tone-lines">
+          {notes.map(({ name, frequency }) => (
+            <div
+              className={`tone-line ${
+                activeNote === frequency ? "active" : ""
+              }`}
+              key={name}
+            >
+              <button
+                className={`tone-button ${
+                  activeNote === frequency ? "active" : ""
+                }`}
+                onClick={() => playNote(frequency)}
+              >
+                {name}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
