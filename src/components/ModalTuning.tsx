@@ -1,13 +1,14 @@
+import React from "react";
+import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -16,7 +17,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button className="modal-close" onClick={onClose}>
           ×
         </button>
-        {children}
+        <ul>
+          {tuningOptions.map((option) => (
+            <li key={option.id}>
+              <h3>{option.name}</h3>
+              <p>{option.notes.join("-")}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
