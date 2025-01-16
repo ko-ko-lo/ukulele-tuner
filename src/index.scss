@@ -332,6 +332,31 @@ ul {
 }
 
 // ========================================================================
+// Audio Visualizer
+// ========================================================================
+.audio-visualizer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: vars.$spacing-unit-large * 9;
+  margin-top: vars.$spacing-unit-large * 10;
+
+  .audio-bar {
+    width: vars.$spacing-unit-small;
+    height: vars.$spacing-unit-large * 9;
+    background-color: vars.$sky-blue-500;
+    border-radius: vars.$radius-m;
+    transition: height 0.3s ease, background-color 0.3s ease;
+
+    &:first-child,
+    &:last-child {
+      height: vars.$spacing-unit-large * 15;
+      width: vars.$spacing-unit-small * 2;
+    }
+  }
+}
+
+// ========================================================================
 // Responsive Design
 // ========================================================================
 @media (max-width: vars.$breakpoint-tablet) {
