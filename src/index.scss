@@ -37,6 +37,7 @@ h1 {
 
 h2 {
   font-size: vars.$font-size-32;
+  margin-bottom: vars.$spacing-unit-large * 3;
 }
 
 h3 {
@@ -45,6 +46,7 @@ h3 {
 
 p {
   font-size: vars.$font-size-16;
+  line-height: 1.5;
 }
 
 // ========================================================================
@@ -75,6 +77,7 @@ button {
 }
 
 button#secondary {
+  // Dropdown-Button
   background-color: transparent;
   box-shadow: none;
   color: vars.$text-color;
@@ -84,9 +87,23 @@ button#secondary {
   padding: 0;
 }
 
+button.btn-secondary {
+  background-color: transparent;
+  box-shadow: none;
+  box-shadow: inset 0 0 0 2px vars.$sky-blue-300;
+  color: vars.$sky-blue-300;
+}
+
 .arrow-icon {
   margin-left: vars.$spacing-unit-large;
   vertical-align: middle;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: vars.$spacing-unit-large * 2;
+  margin-top: vars.$spacing-unit-large * 8;
 }
 
 // ========================================================================
@@ -155,7 +172,7 @@ img {
     vars.$spacing-unit-large * 15;
   border-radius: vars.$radius-m;
   position: relative;
-  max-width: 452px;
+  max-width: 507px;
 }
 
 .modal-close {
@@ -275,6 +292,42 @@ ul {
         }
       }
     }
+  }
+}
+
+// ========================================================================
+// Messages
+// ========================================================================
+.toast {
+  background-color: vars.$success-color;
+  padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-large * 4;
+  color: vars.$background-color;
+  border-radius: vars.$radius-full;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: vars.$spacing-unit-large * 8;
+  position: fixed;
+  z-index: 1000;
+  animation: fadeOut 4s forwards;
+
+  &.success {
+    background-color: vars.$success-color;
+  }
+
+  &.error {
+    background-color: vars.$error-color;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
