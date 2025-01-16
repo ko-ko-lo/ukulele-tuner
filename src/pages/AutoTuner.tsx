@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
 import "../index.scss";
@@ -6,13 +7,32 @@ import "../styles/variables.scss";
 
 const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
-  const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
-  const [hasMicAccess, setHasMicAccess] = useState<boolean | null>(null);
+  const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
+  const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
 
   useEffect(() => {
-    const micAccessGranted = localStorage.getItem("micAccess") === "granted";
-    setIsMicAccessModalOpen(!micAccessGranted);
+    const checkMicPermissions = async () => {
+      try {
+        const permissionStatus = await navigator.permissions.query({
+          name: "microphone" as PermissionName,
+        });
+        if (permissionStatus.state === "granted") {
+          setHasMicAccess(true);
+          setIsMicAccessModalOpen(false);
+        } else if (permissionStatus.state === "denied") {
+          setHasMicAccess(false);
+          setIsMicAccessModalOpen(false);
+        } else {
+          setHasMicAccess(null);
+          setIsMicAccessModalOpen(true);
+        }
+      } catch (err) {
+        console.error("Error checking microphone permissions:", err);
+      }
+    };
+
+    checkMicPermissions();
   }, []);
 
   const requestMicAccess = async () => {
@@ -29,22 +49,10 @@ const AutoTuner = () => {
     }
   };
 
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 4000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
-
   const handleDenyAccess = () => {
     console.log("User denied microphone access.");
-    setIsMicAccessModalOpen(false);
     setHasMicAccess(false);
-    setShowToast(true);
-    localStorage.setItem("micAccess", "denied");
+    setIsMicAccessModalOpen(false);
   };
 
   return (
