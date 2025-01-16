@@ -24,12 +24,14 @@ const MicAccessModal: React.FC<MicAccessModalProps> = ({
           It is used to detect the sound of your Ukulele Strings and provide
           real-time feedback.
         </p>
-        <button className="btn-primary" onClick={onGrantAccess}>
-          Enable Microphone
-        </button>
-        <button className="btn-secondary" onClick={onClose}>
-          Deny Access
-        </button>
+        <div className="button-group">
+          <button className="btn-primary" onClick={onGrantAccess}>
+            Enable Microphone
+          </button>
+          <button className="btn-secondary" onClick={onClose}>
+            Deny Access
+          </button>
+        </div>
       </div>
     </div>
   );

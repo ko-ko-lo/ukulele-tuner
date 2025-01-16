@@ -99,6 +99,13 @@ button.btn-secondary {
   vertical-align: middle;
 }
 
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: vars.$spacing-unit-large * 2;
+  margin-top: vars.$spacing-unit-large * 8;
+}
+
 // ========================================================================
 // Header
 // ========================================================================
@@ -285,6 +292,42 @@ ul {
         }
       }
     }
+  }
+}
+
+// ========================================================================
+// Messages
+// ========================================================================
+.toast {
+  background-color: vars.$success-color;
+  padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-large * 4;
+  color: vars.$background-color;
+  border-radius: vars.$radius-full;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: vars.$spacing-unit-large * 8;
+  position: fixed;
+  z-index: 1000;
+  animation: fadeOut 4s forwards;
+
+  &.success {
+    background-color: vars.$success-color;
+  }
+
+  &.error {
+    background-color: vars.$error-color;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

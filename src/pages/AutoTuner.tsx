@@ -8,9 +8,9 @@ const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
   const [hasMicAccess, setHasMicAccess] = useState<boolean | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
-    // Check localStorage for mic access status
     const micAccessGranted = localStorage.getItem("micAccess") === "granted";
     setIsMicAccessModalOpen(!micAccessGranted);
   }, []);
@@ -20,19 +20,31 @@ const AutoTuner = () => {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       console.log("Microphone access granted!");
       setHasMicAccess(true);
+      setShowToast(true);
       setIsMicAccessModalOpen(false);
-      localStorage.setItem("micAccess", "granted"); // Save status in localStorage
     } catch (err) {
       console.error("Microphone access denied:", err);
       setHasMicAccess(false);
+      setShowToast(true);
     }
   };
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
 
   const handleDenyAccess = () => {
     console.log("User denied microphone access.");
     setIsMicAccessModalOpen(false);
     setHasMicAccess(false);
-    localStorage.setItem("micAccess", "denied"); // Save denial status in localStorage
+    setShowToast(true);
+    localStorage.setItem("micAccess", "denied");
   };
 
   return (
@@ -55,11 +67,12 @@ const AutoTuner = () => {
         onGrantAccess={requestMicAccess}
       />
 
-      {hasMicAccess === true && (
-        <p>Microphone access granted! Starting tuner...</p>
-      )}
-      {hasMicAccess === false && (
-        <p>Microphone access denied. Please enable it to use the auto tuner.</p>
+      {showToast && (
+        <div className={`toast ${hasMicAccess ? "success" : "error"}`}>
+          {hasMicAccess
+            ? "Mic's on! Let's find your Ukulele's perfect pitch."
+            : "Microphone access denied. Access is needed for Auto Tuning."}
+        </div>
       )}
     </div>
   );
