@@ -101,7 +101,8 @@ button.btn-secondary {
 
 .button-group {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: vars.$spacing-unit-large * 2;
   margin-top: vars.$spacing-unit-large * 8;
 }
@@ -173,6 +174,7 @@ img {
   border-radius: vars.$radius-m;
   position: relative;
   max-width: 507px;
+  text-align: center;
 }
 
 .modal-close {
@@ -338,7 +340,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: vars.$spacing-unit-large * 9;
+  gap: 6%;
   margin-top: vars.$spacing-unit-large * 10;
 
   .audio-bar {
@@ -377,6 +379,9 @@ ul {
     font-size: vars.$font-size-32;
     padding-top: vars.$spacing-unit-large * 6;
   }
+  .modal-content {
+    margin: vars.$spacing-unit-large * 2;
+  }
 }
 
 @media (max-width: vars.$breakpoint-mobile) {
@@ -393,7 +398,8 @@ ul {
     padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
   }
 
-  h1 {
+  h1,
+  h2 {
     font-size: vars.$font-size-24;
     line-height: 1.5;
   }
