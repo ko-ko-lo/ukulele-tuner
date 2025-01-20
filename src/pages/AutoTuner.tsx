@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
@@ -53,6 +54,7 @@ const AutoTuner = () => {
     console.log("User denied microphone access.");
     setHasMicAccess(false);
     setIsMicAccessModalOpen(false);
+    setShowToast(true);
   };
 
   return (
@@ -63,6 +65,7 @@ const AutoTuner = () => {
         Standard Tuning
         <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
       </button>
+      <AudioVisualizer />
 
       <ModalTuning
         isOpen={isTuningModalOpen}

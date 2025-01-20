@@ -24,29 +24,31 @@ body {
 h1,
 h2,
 h3 {
-  font-weight: vars.$font-weight-semiBold;
+  font-weight: vars.$font-weight-medium;
   color: vars.$sandy-beige-100;
+  text-align: center;
 }
 
 h1 {
-  font-size: vars.$font-size-40;
-  text-align: center;
+  font-size: vars.$spacing-unit-large * 5;
   padding-top: vars.$spacing-unit-large * 7;
   margin: 0;
 }
 
 h2 {
-  font-size: vars.$font-size-32;
+  font-size: vars.$spacing-unit-large * 4;
   margin-bottom: vars.$spacing-unit-large * 3;
 }
 
 h3 {
-  font-size: vars.$font-size-24;
+  font-size: vars.$spacing-unit-large * 3;
+  font-weight: vars.$font-weight-regular;
+  color: vars.$information-color;
 }
 
 p {
-  font-size: vars.$font-size-16;
-  line-height: 1.5;
+  font-size: vars.$spacing-unit-large * 2;
+  line-height: vars.$lineheight-m;
 }
 
 // ========================================================================
@@ -56,7 +58,7 @@ p {
 button {
   font-family: vars.$font-primary;
   font-weight: vars.$font-weight-semiBold;
-  font-size: vars.$font-size-16;
+  font-size: vars.$spacing-unit-large * 2;
   padding: vars.$spacing-unit-small * 7 vars.$spacing-unit-large * 4;
   background-color: vars.$sky-blue-300;
   color: vars.$background-color;
@@ -82,8 +84,8 @@ button#secondary {
   box-shadow: none;
   color: vars.$text-color;
   width: 100%;
-  margin: vars.$spacing-unit-large * 4 auto 0;
-  font-weight: vars.$font-weight-medium;
+  margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 12;
+  font-weight: vars.$font-weight-regular;
   padding: 0;
 }
 
@@ -101,7 +103,8 @@ button.btn-secondary {
 
 .button-group {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: vars.$spacing-unit-large * 2;
   margin-top: vars.$spacing-unit-large * 8;
 }
@@ -173,6 +176,7 @@ img {
   border-radius: vars.$radius-m;
   position: relative;
   max-width: 507px;
+  text-align: center;
 }
 
 .modal-close {
@@ -228,7 +232,6 @@ ul {
 // Manual Tuner
 // ========================================================================
 .manual-tuner {
-  margin-top: vars.$spacing-unit-large * 10;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -309,6 +312,7 @@ ul {
   position: fixed;
   z-index: 1000;
   animation: fadeOut 4s forwards;
+  text-align: center;
 
   &.success {
     background-color: vars.$success-color;
@@ -332,6 +336,65 @@ ul {
 }
 
 // ========================================================================
+// Audio Visualizer
+// ========================================================================
+.visualizer-container {
+  max-width: 885px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.audio-visualizer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: vars.$spacing-unit-large * 4;
+}
+
+.audio-bar {
+  width: vars.$spacing-unit-small;
+  height: vars.$spacing-unit-large * 9;
+  background-color: vars.$sky-blue-500;
+  //opacity: 70%;
+  border-radius: vars.$radius-m;
+  transition: height 0.3s ease, background-color 0.3s ease;
+
+  &:first-child,
+  &:last-child {
+    height: vars.$spacing-unit-large * 15;
+    width: vars.$spacing-unit-small * 2;
+  }
+}
+
+.audio-center {
+  background-color: vars.$error-color;
+  border-radius: vars.$radius-full;
+  padding: vars.$spacing-unit-large * 5 vars.$spacing-unit-small * 14;
+}
+
+.audio-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 885px;
+  font-size: vars.$spacing-unit-large * 3;
+  opacity: 50%;
+  padding-top: vars.$spacing-unit-large * 4;
+
+  .too-low {
+    text-align: left;
+  }
+
+  .too-high {
+    text-align: right;
+  }
+}
+
+// ========================================================================
 // Responsive Design
 // ========================================================================
 @media (max-width: vars.$breakpoint-tablet) {
@@ -349,8 +412,16 @@ ul {
   }
 
   h1 {
-    font-size: vars.$font-size-32;
+    font-size: vars.$spacing-unit-large * 4;
     padding-top: vars.$spacing-unit-large * 6;
+  }
+
+  h3 {
+    font-size: vars.$spacing-unit-small * 10;
+  }
+
+  .modal-content {
+    margin: vars.$spacing-unit-large * 2;
   }
 }
 
@@ -368,9 +439,14 @@ ul {
     padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
   }
 
-  h1 {
-    font-size: vars.$font-size-24;
-    line-height: 1.5;
+  h1,
+  h2 {
+    font-size: vars.$spacing-unit-large * 3;
+    line-height: vars.$lineheight-m;
+  }
+
+  h3 {
+    font-size: vars.$spacing-unit-small * 9;
   }
 
   .manual-tuner .tone-lines .tone-line .tone-button {
@@ -384,7 +460,7 @@ ul {
 
   .manual-tuner .tone-lines .tone-line::before,
   .manual-tuner .tone-lines .tone-line::after {
-    width: 2px;
+    width: vars.$spacing-unit-small;
   }
 
   .manual-tuner .tone-lines .tone-line::before {
@@ -395,10 +471,6 @@ ul {
     height: vars.$spacing-unit-large * 16;
   }
 
-  .manual-tuner {
-    margin-top: vars.$spacing-unit-large * 6;
-  }
-
   .modal-content {
     padding: vars.$spacing-unit-large * 8 vars.$spacing-unit-large * 5
       vars.$spacing-unit-large * 8;
@@ -407,5 +479,40 @@ ul {
   .modal-close {
     top: 0;
     right: 0;
+  }
+
+  .audio-labels {
+    font-size: vars.$spacing-unit-small * 9;
+    padding-top: vars.$spacing-unit-large * 2;
+  }
+
+  .audio-center img {
+    max-height: vars.$spacing-unit-small * 11;
+  }
+
+  button#secondary {
+    margin-bottom: vars.$spacing-unit-large * 5;
+    margin-top: vars.$spacing-unit-small * 6;
+    font-size: vars.$spacing-unit-small * 6;
+  }
+
+  .audio-center {
+    padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-small * 5;
+  }
+
+  .toast {
+    left: 0%;
+    transform: translateX(-0%);
+    margin-left: vars.$spacing-unit-large * 2;
+    margin-right: vars.$spacing-unit-large * 2;
+  }
+
+  .audio-bar {
+    width: 1px;
+
+    &:first-child,
+    &:last-child {
+      width: vars.$spacing-unit-small;
+    }
   }
 }
