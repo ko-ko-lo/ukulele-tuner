@@ -54,6 +54,7 @@ const AutoTuner = () => {
     console.log("User denied microphone access.");
     setHasMicAccess(false);
     setIsMicAccessModalOpen(false);
+    setShowToast(true);
   };
 
   return (
@@ -64,7 +65,6 @@ const AutoTuner = () => {
         Standard Tuning
         <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
       </button>
-
       <AudioVisualizer />
 
       <ModalTuning
