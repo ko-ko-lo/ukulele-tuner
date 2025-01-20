@@ -371,11 +371,26 @@ ul {
 }
 
 .audio-center {
+  width: vars.$spacing-unit-large * 11;
+  height: vars.$spacing-unit-large * 16;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: vars.$error-color;
   border-radius: vars.$radius-full;
-  padding: vars.$spacing-unit-large * 5 vars.$spacing-unit-small * 14;
-}
+  font-size: vars.$spacing-unit-large * 5;
+  color: vars.$background-color;
+  overflow: hidden;
 
+  &.active {
+    background-color: vars.$information-color;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
 .audio-labels {
   display: flex;
   justify-content: space-between;
@@ -392,6 +407,14 @@ ul {
   .too-high {
     text-align: right;
   }
+}
+// ========================================================================
+// Others
+// ========================================================================
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 // ========================================================================
@@ -497,7 +520,9 @@ ul {
   }
 
   .audio-center {
-    padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-small * 5;
+    width: vars.$spacing-unit-large * 7;
+    height: vars.$spacing-unit-large * 10;
+    font-size: vars.$spacing-unit-large * 4;
   }
 
   .toast {

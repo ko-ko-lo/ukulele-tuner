@@ -3,6 +3,7 @@ import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
+import PitchDetector from "../components/PitchDetector";
 import "../index.scss";
 import "../styles/variables.scss";
 
@@ -11,6 +12,7 @@ const AutoTuner = () => {
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
+  const [detectedPitch, setDetectedPitch] = useState<string | null>(null);
 
   useEffect(() => {
     const checkMicPermissions = async () => {
@@ -34,7 +36,7 @@ const AutoTuner = () => {
     };
 
     checkMicPermissions();
-  }, []);
+  }, [setHasMicAccess]);
 
   const requestMicAccess = async () => {
     try {
@@ -65,7 +67,11 @@ const AutoTuner = () => {
         Standard Tuning
         <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
       </button>
-      <AudioVisualizer />
+
+      {/* PitchDetector handles pitch detection and updates the visualizer */}
+      <PitchDetector onPitchDetected={setDetectedPitch} />
+
+      <AudioVisualizer detectedPitch={detectedPitch} />
 
       <ModalTuning
         isOpen={isTuningModalOpen}

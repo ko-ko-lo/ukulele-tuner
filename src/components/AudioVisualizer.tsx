@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "../index.scss";
 import "../styles/variables.scss";
 
-const AudioVisualizer: React.FC = () => {
-  const [detectedTone, setDetectedTone] = useState<string | null>(null);
+interface AudioVisualizerProps {
+  detectedPitch: string | null;
+}
 
-  const handleDetectTone = () => {
-    // Simulating tone detection
-    setDetectedTone("C4");
-  };
-
+const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ detectedPitch }) => {
   return (
     <div>
-      <h3>Pluck a string to start tuning.</h3>
+      <h3 className={detectedPitch ? "hidden" : ""}>
+        Pluck a string to start tuning.
+      </h3>
 
       <div className="visualizer-container">
         <div className="audio-visualizer">
@@ -20,9 +19,9 @@ const AudioVisualizer: React.FC = () => {
             <div key={`left-${index}`} className="audio-bar"></div>
           ))}
 
-          <div className="audio-center" onClick={handleDetectTone}>
-            {detectedTone ? (
-              <span>{detectedTone}</span>
+          <div className={`audio-center ${detectedPitch ? "active" : ""}`}>
+            {detectedPitch ? (
+              <span>{detectedPitch}</span>
             ) : (
               <span>
                 <img src="./notes.svg" alt="Musical Notes" />
