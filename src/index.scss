@@ -14,8 +14,8 @@ html {
 body {
   font-family: vars.$font-primary;
   font-weight: vars.$font-weight-regular;
-  color: vars.$text-color;
-  background-color: vars.$background-color;
+  color: vars.themed(text-color);
+  background-color: vars.themed(background-color);
 }
 
 // ========================================================================
@@ -25,7 +25,7 @@ h1,
 h2,
 h3 {
   font-weight: vars.$font-weight-medium;
-  color: vars.$sandy-beige-100;
+  color: vars.themed(heading-color);
   text-align: center;
 }
 
@@ -43,7 +43,7 @@ h2 {
 h3 {
   font-size: vars.$spacing-unit-large * 3;
   font-weight: vars.$font-weight-regular;
-  color: vars.$information-color;
+  color: vars.themed(heading3-color);
 }
 
 p {
@@ -60,8 +60,8 @@ button {
   font-weight: vars.$font-weight-semiBold;
   font-size: vars.$spacing-unit-large * 2;
   padding: vars.$spacing-unit-small * 7 vars.$spacing-unit-large * 4;
-  background-color: vars.$sky-blue-300;
-  color: vars.$background-color;
+  background-color: vars.themed(button-background-color);
+  color: vars.themed(button-color);
   border: none;
   border-radius: vars.$radius-s;
   cursor: pointer;
@@ -69,7 +69,7 @@ button {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background-color: vars.$sky-blue-200;
+    background-color: vars.themed(button-hover);
   }
   /*
   &:focus {
@@ -82,7 +82,7 @@ button#secondary {
   // Dropdown-Button
   background-color: transparent;
   box-shadow: none;
-  color: vars.$text-color;
+  color: vars.themed(text-color);
   width: 100%;
   margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 12;
   font-weight: vars.$font-weight-regular;
@@ -93,7 +93,7 @@ button.btn-secondary {
   background-color: transparent;
   box-shadow: none;
   box-shadow: inset 0 0 0 2px vars.$sky-blue-300;
-  color: vars.$sky-blue-300;
+  color: vars.themed(button2-color);
 }
 
 .arrow-icon {
@@ -119,7 +119,7 @@ nav {
   display: inline-flex;
 
   a {
-    color: vars.$text-color;
+    color: vars.themed(text-color);
     text-decoration: none;
     padding: vars.$spacing-unit-large vars.$spacing-unit-large * 3;
     font-size: vars.$spacing-unit-small * 7;
