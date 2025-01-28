@@ -1,13 +1,18 @@
 import { NavLink } from "react-router-dom";
 import "../index.scss";
 import "../styles/variables.scss";
+import { useTheme } from "./ThemeContext";
 
 const Header: React.FC = () => {
+  const { theme } = useTheme();
   // React.FC means "React Functional Component"
   return (
     <header>
       <NavLink to="/">
-        <img src="./logo-aloha.svg" alt="" />
+        <img
+          src={theme === "dark" ? "/logo-aloha.svg" : "/logo-aloha-light.svg"}
+          alt=""
+        />
       </NavLink>
       <nav>
         <NavLink

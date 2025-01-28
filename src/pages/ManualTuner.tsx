@@ -1,11 +1,14 @@
 import { useState } from "react";
 import * as Tone from "tone";
 import Modal from "../components/ModalTuning";
+import { useTheme } from "../components/ThemeContext";
 import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
 
 const ManualTuner = () => {
+  const { theme } = useTheme();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [activeNote, setActiveNote] = useState<string | null>(null);
@@ -31,7 +34,11 @@ const ManualTuner = () => {
 
       <button id="secondary" onClick={() => setIsModalOpen(true)}>
         Standard Tuning
-        <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
+        <img
+          src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
+          alt=""
+          className="arrow-icon"
+        />
       </button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 

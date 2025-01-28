@@ -3,15 +3,17 @@ import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
-import PitchDetector from "../components/PitchDetector";
 import "../index.scss";
 import "../styles/variables.scss";
+import { useTheme } from "../components/ThemeContext";
+import PitchDetector from "../components/PitchDetector";
 
 const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
+  const { theme } = useTheme();
   const [detectedPitch, setDetectedPitch] = useState<string | null>(null);
 
   useEffect(() => {
@@ -65,7 +67,11 @@ const AutoTuner = () => {
 
       <button id="secondary" onClick={() => setIsTuningModalOpen(true)}>
         Standard Tuning
-        <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
+        <img
+          src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
+          alt=""
+          className="arrow-icon"
+        />
       </button>
 
       {/* PitchDetector handles pitch detection and updates the visualizer */}
