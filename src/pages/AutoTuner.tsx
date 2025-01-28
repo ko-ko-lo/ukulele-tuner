@@ -3,6 +3,7 @@ import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
+import { useTheme } from "../components/ThemeContext";
 import "../index.scss";
 import "../styles/variables.scss";
 
@@ -11,6 +12,7 @@ const AutoTuner = () => {
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const checkMicPermissions = async () => {
@@ -63,7 +65,11 @@ const AutoTuner = () => {
 
       <button id="secondary" onClick={() => setIsTuningModalOpen(true)}>
         Standard Tuning
-        <img src="/arrow-down.svg" alt="Arrow Down" className="arrow-icon" />
+        <img
+          src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
+          alt=""
+          className="arrow-icon"
+        />
       </button>
       <AudioVisualizer />
 
