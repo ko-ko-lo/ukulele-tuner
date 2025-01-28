@@ -1,50 +1,20 @@
-# React + TypeScript + Vite
+# Aloha Tune
+Aloha Tuner is a simple and user-friendly web application for tuning Ukuleles. I started this project because I couldn’t find a web-based Ukulele Tuner that was also a PWA. I also wanted something with a touch of Hawaiian-inspired design, while being clean, straightforward, and free of unnecessary clutter. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is still a work in progress and serves as a way for me to grow my skills in software development while combining my interests in music and design.
 
-Currently, two official plugins are available:
+## What the App Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Auto Tuner: Detects the pitch of a plucked string through the microphone and provides feedback (e.g., "Too High", "Too Low", or "Perfect").
+- Manual Tuner: Plays reference tones so you can tune by ear.
+- Light and Dark Modes: A simple toggle to switch between themes.
+- Responsive Design: Works on desktop and mobile.
+- Support for different tunings (e.g., Low G, Baritone).
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The app is built with:
+- React for building the user interface.
+- SCSS for styling with variables and reusable components.
+- Tone.js for audio generation and pitch detection.
+- Vite for development and build performance.
