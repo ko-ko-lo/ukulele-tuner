@@ -1,5 +1,5 @@
 // ========================================================================
-// Dark Mode (default)
+// Light & Dark Mode
 // ========================================================================
 $dark-theme: (
   background-color: #121c24,
@@ -11,14 +11,18 @@ $dark-theme: (
   button-hover: #ceecf7,
   button2-color: #f3fafd,
   button-manual-tuner: #9fd8ef,
-  strings: #f3fafd99,
+  strings-color: #f3fafd99,
+  tone-button-color: #9fd8ef,
+  tone-button-hover: #fdecde,
+  modal-content-bg: #0c3242,
+  audio-bar-color: #87ceeb,
+  button-boxshadow: #b8e3f3,
+  nav-active-bg: #87ceeb,
+  nav-active-color: #121c24,
 );
 
-// ========================================================================
-// Light Mode
-// ========================================================================
 $light-theme: (
-  background-color: #fdecde,
+  background-color: #fef7f1,
   text-color: #211102,
   heading-color: #3e1f04,
   heading3-color: #81410a,
@@ -27,27 +31,41 @@ $light-theme: (
   button-hover: #1f93c0,
   button2-color: #05171f,
   button-manual-tuner: #0c3242,
-  strings: #0c324299,
+  strings-color: #0c324299,
+  tone-button-color: #0c3242,
+  tone-button-hover: #14617f,
+  modal-content-bg: #fdecde,
+  audio-bar-color: #0c3242,
+  button-boxshadow: #14617f,
+  nav-active-bg: #0c3242,
+  nav-active-color: #fef7f1,
 );
 
-// ========================================================================
-// Shared Colors
-// ========================================================================
-$success-color: #76c893;
-$error-color: #ffb6c0;
-$information-color: #f9c99f;
+body[data-theme="dark"] {
+  @each $key, $value in $dark-theme {
+    --#{$key}: #{$value};
+  }
+}
 
-// ========================================================================
-//  Function to get the variable value based on Theme
-// ========================================================================
-@function themed($key) {
-  @return map-get(if($theme == light, $light-theme, $dark-theme), $key);
+body[data-theme="light"] {
+  @each $key, $value in $light-theme {
+    --#{$key}: #{$value};
+  }
 }
 
 // ========================================================================
 // Default theme
 // ========================================================================
 $theme: dark;
+
+// ========================================================================
+// Shared Colors
+// ========================================================================
+:root {
+  --success-color: #76c893;
+  --error-color: #ffb6c0;
+  --information-color: #f9c99f;
+}
 
 // ========================================================================
 // Colors
