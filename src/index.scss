@@ -407,6 +407,8 @@ ul {
   font-size: vars.$spacing-unit-large * 5;
   color: vars.$background-color;
   overflow: hidden;
+  padding: vars.$spacing-unit-large * 5 vars.$spacing-unit-large * 3;
+  max-width: vars.$spacing-unit-large * 4;
 
   &.active {
     background-color: vars.$information-color;

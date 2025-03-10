@@ -3,10 +3,10 @@ import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
+import { useTheme } from "../components/ThemeContext";
+import TonePitchDetector from "../components/TonePitchDetector";
 import "../index.scss";
 import "../styles/variables.scss";
-import { useTheme } from "../components/ThemeContext";
-import PitchDetector from "../components/PitchDetector";
 
 const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
@@ -43,7 +43,6 @@ const AutoTuner = () => {
   const requestMicAccess = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log("Microphone access granted!");
       setHasMicAccess(true);
       setShowToast(true);
       setIsMicAccessModalOpen(false);
@@ -55,7 +54,6 @@ const AutoTuner = () => {
   };
 
   const handleDenyAccess = () => {
-    console.log("User denied microphone access.");
     setHasMicAccess(false);
     setIsMicAccessModalOpen(false);
     setShowToast(true);
@@ -74,9 +72,7 @@ const AutoTuner = () => {
         />
       </button>
 
-      {/* PitchDetector handles pitch detection and updates the visualizer */}
-      <PitchDetector onPitchDetected={setDetectedPitch} />
-
+      <TonePitchDetector onPitchDetected={setDetectedPitch} />
       <AudioVisualizer detectedPitch={detectedPitch} />
 
       <ModalTuning

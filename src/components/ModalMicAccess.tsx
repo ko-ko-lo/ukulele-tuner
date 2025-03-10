@@ -1,4 +1,5 @@
 import React from "react";
+import * as Tone from "tone";
 
 interface MicAccessModalProps {
   isOpen: boolean;
@@ -12,6 +13,18 @@ const MicAccessModal: React.FC<MicAccessModalProps> = ({
   onGrantAccess,
 }) => {
   if (!isOpen) return null;
+
+  const handleGrantAccess = async () => {
+    try {
+      if (Tone.getContext().state === "suspended") {
+        await Tone.start(); // Ensure AudioContext is resumed
+      }
+      await onGrantAccess(); // Request mic permissions
+    } catch (error) {
+      console.error("Error enabling microphone:", error);
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -25,7 +38,7 @@ const MicAccessModal: React.FC<MicAccessModalProps> = ({
           real-time feedback.
         </p>
         <div className="button-group">
-          <button className="btn-primary" onClick={onGrantAccess}>
+          <button className="btn-primary" onClick={handleGrantAccess}>
             Enable Microphone
           </button>
           <button className="btn-secondary" onClick={onClose}>
