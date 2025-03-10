@@ -4,6 +4,7 @@ import { useMicAccess } from "../components/MicAccessContext";
 import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
 import { useTheme } from "../components/ThemeContext";
+import TonePitchDetector from "../components/TonePitchDetector";
 import "../index.scss";
 import "../styles/variables.scss";
 
@@ -13,6 +14,7 @@ const AutoTuner = () => {
   const [showToast, setShowToast] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
   const { theme } = useTheme();
+  const [detectedPitch, setDetectedPitch] = useState<string | null>(null);
 
   useEffect(() => {
     const checkMicPermissions = async () => {
@@ -36,12 +38,11 @@ const AutoTuner = () => {
     };
 
     checkMicPermissions();
-  }, []);
+  }, [setHasMicAccess]);
 
   const requestMicAccess = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log("Microphone access granted!");
       setHasMicAccess(true);
       setShowToast(true);
       setIsMicAccessModalOpen(false);
@@ -53,7 +54,6 @@ const AutoTuner = () => {
   };
 
   const handleDenyAccess = () => {
-    console.log("User denied microphone access.");
     setHasMicAccess(false);
     setIsMicAccessModalOpen(false);
     setShowToast(true);
@@ -71,7 +71,9 @@ const AutoTuner = () => {
           className="arrow-icon"
         />
       </button>
-      <AudioVisualizer />
+
+      <TonePitchDetector onPitchDetected={setDetectedPitch} />
+      <AudioVisualizer detectedPitch={detectedPitch} />
 
       <ModalTuning
         isOpen={isTuningModalOpen}
