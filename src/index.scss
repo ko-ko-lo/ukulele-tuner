@@ -425,7 +425,7 @@ ul {
   width: 100%;
   max-width: 885px;
   font-size: vars.$spacing-unit-large * 3;
-  opacity: 50%;
+  color: #88898a;
   padding-top: vars.$spacing-unit-large * 4;
 
   .too-low {
@@ -434,6 +434,11 @@ ul {
 
   .too-high {
     text-align: right;
+  }
+
+  .too-low.highlight,
+  .too-high.highlight {
+    color: vars.$error-color;
   }
 }
 // ========================================================================
