@@ -5,11 +5,25 @@ import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
 import { useTheme } from "../components/ThemeContext";
 import TonePitchDetector from "../components/TonePitchDetector";
+import { noteFrequencies } from "../constants/constants";
+import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
 
 const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
+  const [selectedTuning, setSelectedTuning] = useState("standard");
+  const currentNotes =
+    tuningOptions.find((option) => option.id === selectedTuning)?.notes || [];
+
+  const tuningFrequencies: Record<string, number> = {};
+
+  currentNotes.forEach((note) => {
+    if (noteFrequencies[note]) {
+      tuningFrequencies[note] = noteFrequencies[note];
+    }
+  });
+
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
   const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
@@ -98,7 +112,9 @@ const AutoTuner = () => {
       <h1>Let's Get Your Ukulele in Tune!</h1>
 
       <button id="secondary" onClick={() => setIsTuningModalOpen(true)}>
-        Standard Tuning
+        {tuningOptions.find((option) => option.id === selectedTuning)?.name ||
+          "Standard Tuning"}
+
         <img
           src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
           alt=""
@@ -106,7 +122,11 @@ const AutoTuner = () => {
         />
       </button>
 
-      <TonePitchDetector onPitchDetected={handlePitchDetected} />
+      <TonePitchDetector
+        onPitchDetected={handlePitchDetected}
+        tuningFrequencies={tuningFrequencies}
+      />
+
       <AudioVisualizer
         detectedPitch={stabilizedPitch}
         detectedPitchFrequency={stabilizedFrequency}
@@ -115,6 +135,11 @@ const AutoTuner = () => {
       <ModalTuning
         isOpen={isTuningModalOpen}
         onClose={() => setIsTuningModalOpen(false)}
+        onSelectTuning={(id) => {
+          setSelectedTuning(id);
+          setIsTuningModalOpen(false);
+        }}
+        selectedTuning={selectedTuning}
       />
 
       <ModalMicAccess
