@@ -34,9 +34,10 @@ The app is built with:
 - **[March 2025]** Fixed issue where "C" appeared before first detection
 - **[March 2025]** Improved pitch accuracy & stability
 - **[March 2025]** Deployed to Firebase
+- **[Mai 2025]** Visual tuning feedback added (too high, too low, in tune)
+- **[Mai 2025]** Alternative Tuning Options available
 
 ### Coming Soon
 
-- **Visual tuning feedback (too high, too low, in tune)**
 - **Improved frequency smoothing for better accuracy**
 - **Enhanced UI & animations**
