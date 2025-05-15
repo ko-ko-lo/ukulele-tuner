@@ -5,7 +5,7 @@ import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
 import { useTheme } from "../components/ThemeContext";
 import TonePitchDetector from "../components/TonePitchDetector";
-import { noteFrequencies } from "../constants/constants";
+import { noteFrequencies } from "../constants/note-frequencies";
 import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
