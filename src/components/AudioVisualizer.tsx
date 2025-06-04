@@ -64,7 +64,7 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   }
 
   return (
-    <div>
+    <div id="audio-visualizer">
       <h3 className={detectedPitch ? "hidden" : ""}>
         Pluck a string to start tuning.
       </h3>

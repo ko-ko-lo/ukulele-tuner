@@ -46,7 +46,7 @@ h3 {
 
 h1 {
   font-size: vars.$spacing-unit-large * 5;
-  padding-top: vars.$spacing-unit-large * 7;
+  padding-top: vars.$spacing-unit-large * 5;
   margin: 0;
 }
 
@@ -99,7 +99,7 @@ button#secondary {
   box-shadow: none;
   color: var(--text-color);
   width: 100%;
-  margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 12;
+  margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 8;
   font-weight: vars.$font-weight-regular;
   padding: 0;
 }
@@ -109,19 +109,22 @@ button.btn-secondary {
   box-shadow: none;
   box-shadow: inset 0 0 0 2px var(--button-boxshadow);
   color: var(--button2-color);
+  margin-top: vars.$spacing-unit-large * 2;
+
+  &:hover {
+    color: var(--button-color);
+    background-color: var(--button-hover);
+  }
+}
+
+.mic-access-inline-message {
+  margin: 0 auto;
+  text-align: center;
 }
 
 .arrow-icon {
   margin-left: vars.$spacing-unit-large;
   vertical-align: middle;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: vars.$spacing-unit-large * 2;
-  margin-top: vars.$spacing-unit-large * 8;
 }
 
 // ========================================================================
@@ -392,6 +395,10 @@ ul {
 // ========================================================================
 // Audio Visualizer
 // ========================================================================
+#audio-visualizer {
+  margin-bottom: vars.$spacing-unit-large * 5;
+}
+
 .visualizer-container {
   max-width: 885px;
   width: 100%;
@@ -575,8 +582,8 @@ ul {
   }
 
   .audio-center {
-    width: vars.$spacing-unit-large * 7;
-    height: vars.$spacing-unit-large * 10;
+    //width: vars.$spacing-unit-large * 7;
+    //height: vars.$spacing-unit-large * 10;
     font-size: vars.$spacing-unit-large * 4;
   }
 
