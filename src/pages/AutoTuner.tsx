@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import AudioVisualizer from "../components/AudioVisualizer";
 import { useMicAccess } from "../components/MicAccessContext";
-import ModalMicAccess from "../components/ModalMicAccess";
 import ModalTuning from "../components/ModalTuning";
 import { useTheme } from "../components/ThemeContext";
 import TonePitchDetector from "../components/TonePitchDetector";
@@ -26,7 +25,6 @@ const AutoTuner = () => {
 
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
-  const [isMicAccessModalOpen, setIsMicAccessModalOpen] = useState(false);
   const { theme } = useTheme();
   const [stabilizedPitch, setStabilizedPitch] = useState<string | null>(null);
   const [stabilizedFrequency, setStabilizedFrequency] = useState<number | null>(
@@ -65,21 +63,17 @@ const AutoTuner = () => {
   useEffect(() => {
     const checkMicPermissions = async () => {
       try {
-        const permissionStatus = await navigator.permissions.query({
+        const status = await navigator.permissions.query({
           name: "microphone" as PermissionName,
         });
-        if (permissionStatus.state === "granted") {
+        if (status.state === "granted") {
           setHasMicAccess(true);
-          setIsMicAccessModalOpen(false);
-        } else if (permissionStatus.state === "denied") {
-          setHasMicAccess(false);
-          setIsMicAccessModalOpen(false);
         } else {
-          setHasMicAccess(null);
-          setIsMicAccessModalOpen(true);
+          setHasMicAccess(false); // default to false (no access yet)
         }
       } catch (err) {
         console.error("Error checking microphone permissions:", err);
+        setHasMicAccess(false);
       }
     };
 
@@ -92,19 +86,11 @@ const AutoTuner = () => {
       console.log("Microphone access granted!");
       setHasMicAccess(true);
       setShowToast(true);
-      setIsMicAccessModalOpen(false);
     } catch (err) {
       console.error("Microphone access denied:", err);
       setHasMicAccess(false);
       setShowToast(true);
     }
-  };
-
-  const handleDenyAccess = () => {
-    console.log("User denied microphone access.");
-    setHasMicAccess(false);
-    setIsMicAccessModalOpen(false);
-    setShowToast(true);
   };
 
   return (
@@ -132,6 +118,15 @@ const AutoTuner = () => {
         detectedPitchFrequency={stabilizedFrequency}
       />
 
+      {hasMicAccess === false && (
+        <div className="mic-access-inline-message">
+          <p>To use the tuner, please allow microphone access.</p>
+          <button className="btn-secondary" onClick={requestMicAccess}>
+            Enable Microphone
+          </button>
+        </div>
+      )}
+
       <ModalTuning
         isOpen={isTuningModalOpen}
         onClose={() => setIsTuningModalOpen(false)}
@@ -140,12 +135,6 @@ const AutoTuner = () => {
           setIsTuningModalOpen(false);
         }}
         selectedTuning={selectedTuning}
-      />
-
-      <ModalMicAccess
-        isOpen={isMicAccessModalOpen}
-        onClose={handleDenyAccess}
-        onGrantAccess={requestMicAccess}
       />
 
       {showToast && (
