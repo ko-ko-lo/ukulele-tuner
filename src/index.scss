@@ -1,5 +1,17 @@
 @use "./styles/variables" as vars;
 
+.audio-bar {
+  width: 6px;
+  height: 24px;
+  background-color: #ddd;
+  margin: 0 2px;
+  transition: background-color 0.3s;
+
+  &.highlight {
+    background-color: var(--error-color); // or your preferred highlight
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -98,10 +110,11 @@ button#secondary {
   background-color: transparent;
   box-shadow: none;
   color: var(--text-color);
-  width: 100%;
   margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 8;
   font-weight: vars.$font-weight-regular;
   padding: 0;
+  text-align: center;
+  display: block;
 }
 
 button.btn-secondary {
@@ -166,7 +179,7 @@ header img {
 // ========================================================================
 footer {
   text-align: right;
-  margin: vars.$spacing-unit-large * 8 0 vars.$spacing-unit-large * 4;
+  margin: vars.$spacing-unit-large * 4 0;
 }
 
 footer img {
@@ -396,7 +409,7 @@ ul {
 // Audio Visualizer
 // ========================================================================
 #audio-visualizer {
-  margin-bottom: vars.$spacing-unit-large * 5;
+  margin-bottom: vars.$spacing-unit-large * 8;
 }
 
 .visualizer-container {
@@ -431,7 +444,7 @@ ul {
 }
 
 .audio-center {
-  background-color: vars.$information-color;
+  background-color: vars.$start-note-color;
   border-radius: vars.$radius-full;
   font-size: vars.$spacing-unit-large * 5;
   color: vars.$background-color;

@@ -17,6 +17,10 @@ const AutoTuner = () => {
 
   const tuningFrequencies: Record<string, number> = {};
 
+  const [lastDetectionTime, setLastDetectionTime] = useState<number | null>(
+    null
+  );
+
   currentNotes.forEach((note) => {
     if (noteFrequencies[note]) {
       tuningFrequencies[note] = noteFrequencies[note];
@@ -38,27 +42,45 @@ const AutoTuner = () => {
     note: string | null;
     frequency: number | null;
   }) => {
-    if (pitchData.note && pitchData.frequency) {
+    const MIN_VALID_FREQUENCY = 100; // Ignore very low background noise
+
+    if (
+      pitchData.note &&
+      pitchData.frequency &&
+      pitchData.frequency > MIN_VALID_FREQUENCY &&
+      Object.keys(tuningFrequencies).includes(pitchData.note)
+    ) {
       recentFrequencies.push(pitchData.frequency);
       if (recentFrequencies.length > SMOOTHING_THRESHOLD) {
         recentFrequencies.shift();
       }
 
-      // Calculate the average of the last few detected frequencies
       const avgFrequency =
         recentFrequencies.reduce((sum, freq) => sum + freq, 0) /
         recentFrequencies.length;
 
-      // Only update if frequency is stable within ±2 Hz for consecutive readings
       if (
         recentFrequencies.length >= SMOOTHING_THRESHOLD &&
         recentFrequencies.every((freq) => Math.abs(freq - avgFrequency) < 2)
       ) {
         setStabilizedPitch(pitchData.note);
         setStabilizedFrequency(avgFrequency);
+        setLastDetectionTime(Date.now());
       }
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (lastDetectionTime && Date.now() - lastDetectionTime > 1500) {
+        setStabilizedPitch(null);
+        setStabilizedFrequency(null);
+        recentFrequencies.length = 0;
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [lastDetectionTime]);
 
   useEffect(() => {
     const checkMicPermissions = async () => {
@@ -66,10 +88,19 @@ const AutoTuner = () => {
         const status = await navigator.permissions.query({
           name: "microphone" as PermissionName,
         });
+
         if (status.state === "granted") {
           setHasMicAccess(true);
+        } else if (status.state === "denied") {
+          setHasMicAccess(false);
         } else {
-          setHasMicAccess(false); // default to false (no access yet)
+          // Firefox fallback: Try once to trigger permission prompt
+          try {
+            await navigator.mediaDevices.getUserMedia({ audio: true });
+            setHasMicAccess(true);
+          } catch {
+            setHasMicAccess(false);
+          }
         }
       } catch (err) {
         console.error("Error checking microphone permissions:", err);

@@ -11,4 +11,4 @@ export const noteFrequencies: Record<string, number> = {
   B4: 493.88,
 };
 
-export const TOLERANCE = 3; // Hz range for "in tune"
+export const TOLERANCE = 5; // Hz range for "in tune" -> back to 3?

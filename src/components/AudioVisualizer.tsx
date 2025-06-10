@@ -36,6 +36,8 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   detectedPitch,
   detectedPitchFrequency,
 }) => {
+  let deviation = 0;
+  let offsetBars = 0;
   let isTooLow = false;
   let isTooHigh = false;
 
@@ -49,12 +51,11 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
     if (targetFrequency) {
       // Compare detected frequency to target (difference > 0 = too high, difference < 0 = too low,
       // if the difference is small, the note is in tune)
-      const difference = detectedPitchFrequency - targetFrequency;
-
+      deviation = detectedPitchFrequency - targetFrequency;
       // This prevents feedback from jumping too fast due to tiny differences.
-      if (Math.abs(difference) > TOLERANCE) {
-        // Set the matching indicator (how the note is off) so that the UI can react
-        if (difference > 0) {
+      if (Math.abs(deviation) > TOLERANCE) {
+        offsetBars = Math.min(5, Math.floor(Math.abs(deviation) / 2));
+        if (deviation > 0) {
           isTooHigh = true;
         } else {
           isTooLow = true;
@@ -72,7 +73,12 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
       <div className="visualizer-container">
         <div className="audio-visualizer">
           {[...Array(5)].map((_, index) => (
-            <div key={`left-${index}`} className="audio-bar"></div>
+            <div
+              key={`left-${index}`}
+              className={`audio-bar ${
+                isTooLow && offsetBars > index ? "highlight" : ""
+              }`}
+            ></div>
           ))}
 
           <div className={`audio-center ${detectedPitch ? "active" : ""}`}>
@@ -84,7 +90,12 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
           </div>
 
           {[...Array(5)].map((_, index) => (
-            <div key={`right-${index}`} className="audio-bar"></div>
+            <div
+              key={`right-${index}`}
+              className={`audio-bar ${
+                isTooHigh && offsetBars > index ? "highlight" : ""
+              }`}
+            ></div>
           ))}
         </div>
 
