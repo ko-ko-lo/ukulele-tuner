@@ -22,24 +22,8 @@ The app is built with:
 - **Vite** for development and build performance.
 - **Firebase** for Hosting.
 
-## Changelog
 
-### 2025
-
-- **[January 2025]** Designed the Aloha Tune application in Figma
-- **[January 2025]** Set up project structure, including React Router & Tone.js
-- **[January 2025]** Implemented a static UI using SCSS variables
-- **[January 2025]** Added Light / Dark Mode toggle
-- **[January 2025]** Captured microphone input for real-time tuning
-- **[January 2025]** Implemented string selection for Manual Tuning
-- **[March 2025]** Implemented real-time pitch detection using Tone.js
-- **[March 2025]** Fixed issue where "C" appeared before first detection
-- **[March 2025]** Improved pitch accuracy & stability
-- **[March 2025]** Deployed to Firebase
-- **[Mai 2025]** Visual tuning feedback added (too high, too low, in tune)
-- **[Mai 2025]** Alternative Tuning Options available
-
-### Coming Soon
+## Coming Soon
 
 - **Improved frequency smoothing for better accuracy**
 - **Enhanced UI & animations**
