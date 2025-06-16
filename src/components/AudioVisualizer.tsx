@@ -27,6 +27,8 @@ interface AudioVisualizerProps {
   detectedPitch: string | null;
   // The frequency in Hz of the detected pitch. Used to determine pitch accuracy.
   detectedPitchFrequency: number | null;
+  hasMicAccess: boolean | null;
+  onRequestMicAccess: () => void;
 }
 
 // Acceptable frequency deviation (in Hz) from the target note to still be considered “in tune”.
@@ -35,6 +37,8 @@ const TOLERANCE = 3;
 const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   detectedPitch,
   detectedPitchFrequency,
+  hasMicAccess,
+  onRequestMicAccess,
 }) => {
   let deviation = 0;
   let offsetBars = 0;
@@ -66,9 +70,21 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
 
   return (
     <div id="audio-visualizer">
-      <h3 className={detectedPitch ? "hidden" : ""}>
-        Pluck a string to start tuning.
-      </h3>
+      {!detectedPitch && (
+        <h3>
+          {hasMicAccess === false ? (
+            <>
+              To use the tuner, please{" "}
+              <button className="as-link" onClick={onRequestMicAccess}>
+                enable microphone access
+              </button>
+              .
+            </>
+          ) : (
+            "Pluck a string to start tuning."
+          )}
+        </h3>
+      )}
 
       <div className="visualizer-container">
         <div className="audio-visualizer">

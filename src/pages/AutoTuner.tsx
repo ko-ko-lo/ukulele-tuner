@@ -147,16 +147,18 @@ const AutoTuner = () => {
       <AudioVisualizer
         detectedPitch={stabilizedPitch}
         detectedPitchFrequency={stabilizedFrequency}
+        hasMicAccess={hasMicAccess}
+        onRequestMicAccess={requestMicAccess}
       />
 
-      {hasMicAccess === false && (
+      {/*hasMicAccess === false && (
         <div className="mic-access-inline-message">
           <p>To use the tuner, please allow microphone access.</p>
           <button className="btn-secondary" onClick={requestMicAccess}>
             Enable Microphone
           </button>
         </div>
-      )}
+      )*/}
 
       <ModalTuning
         isOpen={isTuningModalOpen}

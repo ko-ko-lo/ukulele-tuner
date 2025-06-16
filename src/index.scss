@@ -130,9 +130,19 @@ button.btn-secondary {
   }
 }
 
-.mic-access-inline-message {
-  margin: 0 auto;
-  text-align: center;
+.as-link {
+  background: none;
+  border: none;
+  color: var(--heading3-color);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+
+  &:hover {
+    background-color: transparent;
+    color: var(--heading-color);
+  }
 }
 
 .arrow-icon {
