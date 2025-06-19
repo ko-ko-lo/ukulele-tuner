@@ -28,6 +28,7 @@ interface AudioVisualizerProps {
   // The frequency in Hz of the detected pitch. Used to determine pitch accuracy.
   detectedPitchFrequency: number | null;
   hasMicAccess: boolean | null;
+  isTuned: boolean;
   onRequestMicAccess: () => void;
 }
 
@@ -39,6 +40,7 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   detectedPitchFrequency,
   hasMicAccess,
   onRequestMicAccess,
+  isTuned,
 }) => {
   let deviation = 0;
   let offsetBars = 0;
@@ -70,21 +72,21 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
 
   return (
     <div id="audio-visualizer">
-      {!detectedPitch && (
-        <h3>
-          {hasMicAccess === false ? (
-            <>
-              To use the tuner, please{" "}
-              <button className="as-link" onClick={onRequestMicAccess}>
-                enable microphone access
-              </button>
-              .
-            </>
-          ) : (
-            "Pluck a string to start tuning."
-          )}
-        </h3>
-      )}
+      <h3 className={detectedPitch ? "hidden" : ""}>
+        {hasMicAccess === false ? (
+          <>
+            To use the tuner, please{" "}
+            <button className="as-link" onClick={onRequestMicAccess}>
+              enable microphone access
+            </button>
+            .
+          </>
+        ) : isTuned ? (
+          "String Tuned!"
+        ) : (
+          "Pluck a string to start tuning."
+        )}
+      </h3>
 
       <div className="visualizer-container">
         <div className="audio-visualizer">
@@ -97,8 +99,14 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
             ></div>
           ))}
 
-          <div className={`audio-center ${detectedPitch ? "active" : ""}`}>
-            {detectedPitch ? (
+          <div
+            className={`audio-center ${detectedPitch ? "active" : ""} ${
+              isTuned ? "tuned" : ""
+            }`}
+          >
+            {isTuned ? (
+              <img src="/success.svg" alt="Tuned!" />
+            ) : detectedPitch ? (
               <span>{detectedPitch}</span>
             ) : (
               <img src="./notes.svg" alt="Musical Notes" />

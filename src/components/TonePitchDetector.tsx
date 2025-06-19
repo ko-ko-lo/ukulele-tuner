@@ -95,7 +95,7 @@ const TonePitchDetector: React.FC<TonePitchDetectorProps> = ({
 
     // treat this as silence
     if (rms < 0.06) return -1;
-    console.log("RMS:", rms);
+    // console.log("RMS:", rms);
 
     let maxIndex = 0;
     let maxValue = -Infinity;

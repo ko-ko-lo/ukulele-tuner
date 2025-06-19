@@ -21,6 +21,10 @@ const AutoTuner = () => {
     null
   );
 
+  // New States
+  const [isTuned, setIsTuned] = useState(false);
+  const [tunedTimestamp, setTunedTimestamp] = useState<number | null>(null);
+
   currentNotes.forEach((note) => {
     if (noteFrequencies[note]) {
       tuningFrequencies[note] = noteFrequencies[note];
@@ -43,6 +47,8 @@ const AutoTuner = () => {
     frequency: number | null;
   }) => {
     const MIN_VALID_FREQUENCY = 100; // Ignore very low background noise
+    // New
+    let avgFrequency = 0;
 
     if (
       pitchData.note &&
@@ -55,7 +61,7 @@ const AutoTuner = () => {
         recentFrequencies.shift();
       }
 
-      const avgFrequency =
+      avgFrequency =
         recentFrequencies.reduce((sum, freq) => sum + freq, 0) /
         recentFrequencies.length;
 
@@ -68,6 +74,24 @@ const AutoTuner = () => {
         setLastDetectionTime(Date.now());
       }
     }
+    // New
+    const deviation =
+      pitchData.note && noteFrequencies[pitchData.note]
+        ? Math.abs(avgFrequency - noteFrequencies[pitchData.note])
+        : Infinity;
+
+    if (pitchData.note && deviation <= 3) {
+      const now = Date.now();
+      if (!tunedTimestamp) {
+        setTunedTimestamp(now);
+      } else if (now - tunedTimestamp >= 1000) {
+        setIsTuned(true);
+      }
+    } else {
+      setTunedTimestamp(null);
+      setIsTuned(false);
+    }
+    console.log("What is:" + pitchData.note, pitchData.frequency);
   };
 
   useEffect(() => {
@@ -149,16 +173,8 @@ const AutoTuner = () => {
         detectedPitchFrequency={stabilizedFrequency}
         hasMicAccess={hasMicAccess}
         onRequestMicAccess={requestMicAccess}
+        isTuned={isTuned}
       />
-
-      {/*hasMicAccess === false && (
-        <div className="mic-access-inline-message">
-          <p>To use the tuner, please allow microphone access.</p>
-          <button className="btn-secondary" onClick={requestMicAccess}>
-            Enable Microphone
-          </button>
-        </div>
-      )*/}
 
       <ModalTuning
         isOpen={isTuningModalOpen}
