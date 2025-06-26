@@ -33,7 +33,7 @@ interface AudioVisualizerProps {
 }
 
 // Acceptable frequency deviation (in Hz) from the target note to still be considered “in tune”.
-const TOLERANCE = 3;
+const TOLERANCE = 7;
 
 const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   detectedPitch,
@@ -104,9 +104,7 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
               isTuned ? "tuned" : ""
             }`}
           >
-            {isTuned ? (
-              <img src="/success.svg" alt="Tuned!" />
-            ) : detectedPitch ? (
+            {detectedPitch ? (
               <span>{detectedPitch}</span>
             ) : (
               <img src="./notes.svg" alt="Musical Notes" />

@@ -498,6 +498,29 @@ ul {
   background-color: vars.$success-color;
 }
 
+.audio-center.tuned {
+  background-color: #d4edda;
+  border: 2px solid #28a745;
+  box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+.audio-center.tuned {
+  animation: pulse 1.5s infinite;
+}
+
 // ========================================================================
 // Others
 // ========================================================================

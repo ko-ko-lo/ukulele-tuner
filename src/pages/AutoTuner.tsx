@@ -21,9 +21,10 @@ const AutoTuner = () => {
     null
   );
 
-  // New States
   const [isTuned, setIsTuned] = useState(false);
   const [tunedTimestamp, setTunedTimestamp] = useState<number | null>(null);
+
+  const TOLERANCE = 7;
 
   currentNotes.forEach((note) => {
     if (noteFrequencies[note]) {
@@ -40,21 +41,32 @@ const AutoTuner = () => {
   );
 
   const recentFrequencies: number[] = [];
-  const SMOOTHING_THRESHOLD = 5; // Number of consecutive stable detections required
+  // Number of consecutive stable detections required before trusting a note
+  const SMOOTHING_THRESHOLD = 5;
+
+  const isWithinNoteRange = (note: string, frequency: number) => {
+    const target = noteFrequencies[note];
+    if (!target) return false;
+
+    const RANGE_BUFFER = 10; // You can tweak this
+    return (
+      frequency >= target - RANGE_BUFFER && frequency <= target + RANGE_BUFFER
+    );
+  };
 
   const handlePitchDetected = (pitchData: {
     note: string | null;
     frequency: number | null;
   }) => {
-    const MIN_VALID_FREQUENCY = 100; // Ignore very low background noise
-    // New
+    const MIN_VALID_FREQUENCY = 100;
+
     let avgFrequency = 0;
 
     if (
       pitchData.note &&
       pitchData.frequency &&
       pitchData.frequency > MIN_VALID_FREQUENCY &&
-      Object.keys(tuningFrequencies).includes(pitchData.note)
+      isWithinNoteRange(pitchData.note, pitchData.frequency)
     ) {
       recentFrequencies.push(pitchData.frequency);
       if (recentFrequencies.length > SMOOTHING_THRESHOLD) {
@@ -65,40 +77,54 @@ const AutoTuner = () => {
         recentFrequencies.reduce((sum, freq) => sum + freq, 0) /
         recentFrequencies.length;
 
-      if (
+      const isStable =
         recentFrequencies.length >= SMOOTHING_THRESHOLD &&
-        recentFrequencies.every((freq) => Math.abs(freq - avgFrequency) < 2)
+        recentFrequencies.every((freq) => Math.abs(freq - avgFrequency) < 2);
+
+      if (
+        isStable &&
+        pitchData.note &&
+        Object.keys(tuningFrequencies).includes(pitchData.note)
       ) {
+        const targetFreq = tuningFrequencies[pitchData.note];
+        const deviation = Math.abs(avgFrequency - targetFreq);
+
+        if (deviation <= TOLERANCE) {
+          const now = Date.now();
+
+          if (!tunedTimestamp) {
+            setTunedTimestamp(now);
+          } else if (now - tunedTimestamp >= 2000) {
+            setIsTuned(true);
+          }
+        } else {
+          setTunedTimestamp(null);
+          setIsTuned(false);
+        }
+
         setStabilizedPitch(pitchData.note);
         setStabilizedFrequency(avgFrequency);
         setLastDetectionTime(Date.now());
       }
     }
-    // New
-    const deviation =
-      pitchData.note && noteFrequencies[pitchData.note]
-        ? Math.abs(avgFrequency - noteFrequencies[pitchData.note])
-        : Infinity;
-
-    if (pitchData.note && deviation <= 3) {
-      const now = Date.now();
-      if (!tunedTimestamp) {
-        setTunedTimestamp(now);
-      } else if (now - tunedTimestamp >= 1000) {
-        setIsTuned(true);
-      }
-    } else {
-      setTunedTimestamp(null);
-      setIsTuned(false);
-    }
-    console.log("What is:" + pitchData.note, pitchData.frequency);
   };
+
+  useEffect(() => {
+    if (isTuned) {
+      const timeout = setTimeout(() => {
+        setIsTuned(false);
+      }, 3000); // ⏱ hide after 3s
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isTuned]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (lastDetectionTime && Date.now() - lastDetectionTime > 1500) {
         setStabilizedPitch(null);
         setStabilizedFrequency(null);
+        setIsTuned(false);
         recentFrequencies.length = 0;
       }
     }, 500);
