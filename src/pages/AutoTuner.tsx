@@ -4,7 +4,13 @@ import { useMicAccess } from "../components/MicAccessContext";
 import ModalTuning from "../components/ModalTuning";
 import { useTheme } from "../components/ThemeContext";
 import TonePitchDetector from "../components/TonePitchDetector";
-import { noteFrequencies } from "../constants/note-frequencies";
+import {
+  calculateAverageFrequency,
+  getTuningFrequenciesFor,
+  isStablePitch,
+  isWithinNoteRange,
+} from "../components/tunerHelpers";
+import { TOLERANCE, noteFrequencies } from "../constants/note-frequencies";
 import { tuningOptions } from "../constants/tuningOptions";
 import "../index.scss";
 import "../styles/variables.scss";
@@ -15,16 +21,14 @@ const AutoTuner = () => {
   const currentNotes =
     tuningOptions.find((option) => option.id === selectedTuning)?.notes || [];
 
-  const tuningFrequencies: Record<string, number> = {};
+  const tuningFrequencies = getTuningFrequenciesFor(currentNotes);
 
   const [lastDetectionTime, setLastDetectionTime] = useState<number | null>(
     null
   );
-
   const [isTuned, setIsTuned] = useState(false);
   const [tunedTimestamp, setTunedTimestamp] = useState<number | null>(null);
-
-  const TOLERANCE = 7;
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
 
   currentNotes.forEach((note) => {
     if (noteFrequencies[note]) {
@@ -39,72 +43,70 @@ const AutoTuner = () => {
   const [stabilizedFrequency, setStabilizedFrequency] = useState<number | null>(
     null
   );
+  const [lockedPitch, setLockedPitch] = useState<string | null>(null);
+  const [lockedFrequency, setLockedFrequency] = useState<number | null>(null);
 
   const recentFrequencies: number[] = [];
-  // Number of consecutive stable detections required before trusting a note
   const SMOOTHING_THRESHOLD = 5;
-
-  const isWithinNoteRange = (note: string, frequency: number) => {
-    const target = noteFrequencies[note];
-    if (!target) return false;
-
-    const RANGE_BUFFER = 10; // You can tweak this
-    return (
-      frequency >= target - RANGE_BUFFER && frequency <= target + RANGE_BUFFER
-    );
-  };
 
   const handlePitchDetected = (pitchData: {
     note: string | null;
     frequency: number | null;
   }) => {
     const MIN_VALID_FREQUENCY = 100;
-
     let avgFrequency = 0;
+
+    // New
+    if (
+      pitchData.note &&
+      pitchData.frequency &&
+      pitchData.frequency > 100 &&
+      isWithinNoteRange(pitchData.note, pitchData.frequency)
+    ) {
+      // 🎯 Proceed with smoothing and tuning logic
+    } else {
+      // ❌ Invalid input — wipe state to prevent false positives
+      setTunedTimestamp(null);
+      setIsTuned(false);
+    }
 
     if (
       pitchData.note &&
       pitchData.frequency &&
       pitchData.frequency > MIN_VALID_FREQUENCY &&
-      isWithinNoteRange(pitchData.note, pitchData.frequency)
+      Object.keys(tuningFrequencies).includes(pitchData.note)
     ) {
       recentFrequencies.push(pitchData.frequency);
       if (recentFrequencies.length > SMOOTHING_THRESHOLD) {
         recentFrequencies.shift();
       }
 
-      avgFrequency =
-        recentFrequencies.reduce((sum, freq) => sum + freq, 0) /
-        recentFrequencies.length;
+      avgFrequency = calculateAverageFrequency(recentFrequencies);
 
-      const isStable =
-        recentFrequencies.length >= SMOOTHING_THRESHOLD &&
-        recentFrequencies.every((freq) => Math.abs(freq - avgFrequency) < 2);
+      const isStable = isStablePitch(recentFrequencies, SMOOTHING_THRESHOLD, 2);
 
-      if (
-        isStable &&
-        pitchData.note &&
-        Object.keys(tuningFrequencies).includes(pitchData.note)
-      ) {
-        const targetFreq = tuningFrequencies[pitchData.note];
+      if (isStable) {
+        setStabilizedPitch(pitchData.note);
+        setStabilizedFrequency(avgFrequency);
+        setLastDetectionTime(Date.now());
+
+        const targetFreq = noteFrequencies[pitchData.note];
         const deviation = Math.abs(avgFrequency - targetFreq);
+        const now = Date.now();
 
-        if (deviation <= TOLERANCE) {
-          const now = Date.now();
-
+        if (deviation <= TOLERANCE && (!cooldownUntil || now > cooldownUntil)) {
           if (!tunedTimestamp) {
             setTunedTimestamp(now);
-          } else if (now - tunedTimestamp >= 2000) {
+          } else if (now - tunedTimestamp >= 500) {
             setIsTuned(true);
+            setLockedPitch(pitchData.note);
+            setLockedFrequency(avgFrequency);
+            setCooldownUntil(now + 2500);
           }
         } else {
           setTunedTimestamp(null);
           setIsTuned(false);
         }
-
-        setStabilizedPitch(pitchData.note);
-        setStabilizedFrequency(avgFrequency);
-        setLastDetectionTime(Date.now());
       }
     }
   };
@@ -113,7 +115,9 @@ const AutoTuner = () => {
     if (isTuned) {
       const timeout = setTimeout(() => {
         setIsTuned(false);
-      }, 3000); // ⏱ hide after 3s
+        setLockedPitch(null);
+        setLockedFrequency(null);
+      }, 2000);
 
       return () => clearTimeout(timeout);
     }
@@ -125,6 +129,8 @@ const AutoTuner = () => {
         setStabilizedPitch(null);
         setStabilizedFrequency(null);
         setIsTuned(false);
+        setLockedPitch(null);
+        setLockedFrequency(null);
         recentFrequencies.length = 0;
       }
     }, 500);
@@ -144,7 +150,6 @@ const AutoTuner = () => {
         } else if (status.state === "denied") {
           setHasMicAccess(false);
         } else {
-          // Firefox fallback: Try once to trigger permission prompt
           try {
             await navigator.mediaDevices.getUserMedia({ audio: true });
             setHasMicAccess(true);
@@ -195,8 +200,8 @@ const AutoTuner = () => {
       />
 
       <AudioVisualizer
-        detectedPitch={stabilizedPitch}
-        detectedPitchFrequency={stabilizedFrequency}
+        detectedPitch={isTuned ? lockedPitch : stabilizedPitch}
+        detectedPitchFrequency={isTuned ? lockedFrequency : stabilizedFrequency}
         hasMicAccess={hasMicAccess}
         onRequestMicAccess={requestMicAccess}
         isTuned={isTuned}

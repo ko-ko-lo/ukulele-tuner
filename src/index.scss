@@ -521,6 +521,12 @@ ul {
   animation: pulse 1.5s infinite;
 }
 
+.success-message {
+  color: vars.$success-color;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
 // ========================================================================
 // Others
 // ========================================================================

@@ -18,7 +18,7 @@
 ------------------------------------------------------------------ */
 
 import React from "react";
-import { noteFrequencies } from "../constants/note-frequencies";
+import { TOLERANCE, noteFrequencies } from "../constants/note-frequencies";
 import "../index.scss";
 import "../styles/variables.scss";
 
@@ -31,9 +31,6 @@ interface AudioVisualizerProps {
   isTuned: boolean;
   onRequestMicAccess: () => void;
 }
-
-// Acceptable frequency deviation (in Hz) from the target note to still be considered “in tune”.
-const TOLERANCE = 7;
 
 const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
   detectedPitch,
@@ -61,18 +58,23 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
       // This prevents feedback from jumping too fast due to tiny differences.
       if (Math.abs(deviation) > TOLERANCE) {
         offsetBars = Math.min(5, Math.floor(Math.abs(deviation) / 2));
-        if (deviation > 0) {
-          isTooHigh = true;
-        } else {
-          isTooLow = true;
-        }
+        if (deviation > 0) isTooHigh = true;
+        else isTooLow = true;
       }
     }
   }
 
   return (
     <div id="audio-visualizer">
-      <h3 className={detectedPitch ? "hidden" : ""}>
+      <h3
+        className={
+          detectedPitch && !isTuned
+            ? "hidden"
+            : isTuned
+            ? "success-message"
+            : ""
+        }
+      >
         {hasMicAccess === false ? (
           <>
             To use the tuner, please{" "}

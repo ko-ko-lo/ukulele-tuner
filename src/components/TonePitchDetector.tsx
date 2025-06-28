@@ -21,10 +21,8 @@ interface TonePitchDetectorProps {
 }
 
 /* ------------------------------------------------------------------
-  - defining a React functional component with TypeScript
-    - creating a constant variable named TonePitchDetector (this variable is the component)
-    - This constant variable is a React Functional Component (React.FC)
-      that expects props described by the TonePitchDetectorProps interface.
+    - creating a constant/component (TonePitchDetector) that expects
+    props described by the TonePitchDetectorProps interface.
 ------------------------------------------------------------------ */
 
 const TonePitchDetector: React.FC<TonePitchDetectorProps> = ({
@@ -90,34 +88,35 @@ const TonePitchDetector: React.FC<TonePitchDetectorProps> = ({
     frequencyData: Float32Array,
     sampleRate: number
   ): number => {
-    //  Root Mean Square (RMS) threshold
+    // Calculate RMS
     let rms = 0;
-
     for (let i = 0; i < frequencyData.length; i++) {
       rms += frequencyData[i] * frequencyData[i];
     }
     rms = Math.sqrt(rms / frequencyData.length);
+    if (rms < 0.08) return -1; // Reject very quiet input
 
-    // treat this as silence
-    if (rms < 0.06) return -1;
-    // console.log("RMS:", rms);
-
+    // Find max bin in FFT
     let maxIndex = 0;
     let maxValue = -Infinity;
-
-    const minIndex = Math.floor(50 / (sampleRate / frequencyData.length));
-    const maxIndexLimit = Math.floor(
-      1000 / (sampleRate / frequencyData.length)
-    );
-
-    for (let i = minIndex; i < maxIndexLimit; i++) {
+    for (let i = 0; i < frequencyData.length; i++) {
       if (frequencyData[i] > maxValue) {
         maxValue = frequencyData[i];
         maxIndex = i;
       }
     }
 
-    return (sampleRate / 2) * (maxIndex / frequencyData.length);
+    const dominantFreq = (sampleRate / 2) * (maxIndex / frequencyData.length);
+    if (dominantFreq < 100 || dominantFreq > 1000) return -1; // 🔒 Valid pitch range
+
+    // Optional: compare peak to neighbors
+    const margin = 2;
+    const left = frequencyData[maxIndex - margin] || 0;
+    const right = frequencyData[maxIndex + margin] || 0;
+    const isPeak = frequencyData[maxIndex] > (left + right) * 0.75;
+    if (!isPeak) return -1; // 🔒 Weak peak, probably noise
+
+    return dominantFreq;
   };
 
   // Map detected frequency to closest ukulele note
