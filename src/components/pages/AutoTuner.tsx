@@ -14,12 +14,13 @@ import {
   isWithinNoteRange,
 } from "../audio/tuner/tunerHelpers";
 import { useMicAccess } from "../context/MicAccessContext";
-import { useTheme } from "../context/ThemeContext";
 import AudioVisualizer from "../patterns/AudioVisualizer";
-import ModalTuning from "../patterns/ModalTuning";
+import Modal from "../patterns/ModalTuning";
+import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
+import { Toast } from "../ui/toast";
 
 const AutoTuner = () => {
-  const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTuning, setSelectedTuning] = useState("standard");
   const currentNotes =
     tuningOptions.find((option) => option.id === selectedTuning)?.notes || [];
@@ -41,7 +42,6 @@ const AutoTuner = () => {
 
   const { hasMicAccess, setHasMicAccess } = useMicAccess();
   const [showToast, setShowToast] = useState(false);
-  const { theme } = useTheme();
   const [stabilizedPitch, setStabilizedPitch] = useState<string | null>(null);
   const [stabilizedFrequency, setStabilizedFrequency] = useState<number | null>(
     null
@@ -59,16 +59,15 @@ const AutoTuner = () => {
     const MIN_VALID_FREQUENCY = 100;
     let avgFrequency = 0;
 
-    // New
     if (
       pitchData.note &&
       pitchData.frequency &&
       pitchData.frequency > 100 &&
       isWithinNoteRange(pitchData.note, pitchData.frequency)
     ) {
-      // 🎯 Proceed with smoothing and tuning logic
+      // Proceed with smoothing and tuning logic
     } else {
-      // ❌ Invalid input — wipe state to prevent false positives
+      // Invalid input — wipe state to prevent false positives
       setTunedTimestamp(null);
       setIsTuned(false);
     }
@@ -172,11 +171,9 @@ const AutoTuner = () => {
   const requestMicAccess = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log("Microphone access granted!");
       setHasMicAccess(true);
       setShowToast(true);
     } catch (err) {
-      console.error("Microphone access denied:", err);
       setHasMicAccess(false);
       setShowToast(true);
     }
@@ -186,17 +183,11 @@ const AutoTuner = () => {
     <div className="centered-container">
       <h1>Let's Get Your Ukulele in Tune!</h1>
 
-      <button id="secondary" onClick={() => setIsTuningModalOpen(true)}>
-        {tuningOptions.find((option) => option.id === selectedTuning)?.name ||
-          "Standard Tuning"}
-
-        <img
-          src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
-          alt=""
-          className="arrow-icon"
-        />
-      </button>
-
+      <TuningSelectorButton
+        selectedTuning={selectedTuning}
+        tuningOptions={tuningOptions}
+        onClick={() => setIsModalOpen(true)}
+      />
       <TonePitchDetector
         onPitchDetected={handlePitchDetected}
         tuningFrequencies={tuningFrequencies}
@@ -210,22 +201,25 @@ const AutoTuner = () => {
         isTuned={isTuned}
       />
 
-      <ModalTuning
-        isOpen={isTuningModalOpen}
-        onClose={() => setIsTuningModalOpen(false)}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         onSelectTuning={(id) => {
           setSelectedTuning(id);
-          setIsTuningModalOpen(false);
+          setIsModalOpen(false);
         }}
         selectedTuning={selectedTuning}
       />
 
       {showToast && (
-        <div className={`toast ${hasMicAccess ? "success" : "error"}`}>
-          {hasMicAccess
-            ? "Mic's on! Let's find your Ukulele's perfect pitch."
-            : "Microphone access denied. Access is needed for Auto Tuning."}
-        </div>
+        <Toast
+          message={
+            hasMicAccess
+              ? "Mic's on! Let's find your Ukulele's perfect pitch."
+              : "Microphone access denied. Access is needed for Auto Tuning."
+          }
+          type={hasMicAccess ? "success" : "error"}
+        />
       )}
     </div>
   );

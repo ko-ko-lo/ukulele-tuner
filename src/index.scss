@@ -87,17 +87,12 @@ button {
   font-weight: vars.$font-weight-semiBold;
   font-size: vars.$spacing-unit-large * 2;
   padding: vars.$spacing-unit-small * 7 vars.$spacing-unit-large * 4;
-  background-color: var(--button-background-color);
   color: var(--button-color);
   border: none;
   border-radius: vars.$radius-s;
   cursor: pointer;
-  box-shadow: vars.$elevation-xs;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-  &:hover {
-    background-color: var(--button-hover);
-  }
   /*
   &:focus {
     outline: 2px solid vars.$sky-blue-50;
@@ -105,7 +100,7 @@ button {
   */
 }
 
-button#secondary {
+button#tuning-selector {
   // Dropdown-Button
   background-color: transparent;
   box-shadow: none;
@@ -185,20 +180,27 @@ header img {
 }
 
 // ========================================================================
-// Footer
+// Theme Toggle Button
 // ========================================================================
-footer {
-  text-align: right;
-  margin: vars.$spacing-unit-large * 4 0;
+button.theme-toggle-button {
+  margin: vars.$spacing-unit-large * 4 0 vars.$spacing-unit-large * 4 auto;
+  background-color: transparent;
 }
 
-footer img {
+button.theme-toggle-button img {
   transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-footer img:hover {
+button.theme-toggle-button img:hover {
   transform: scale(1.1);
+}
+
+// ========================================================================
+// Footer
+// ========================================================================
+footer {
+  display: flex;
 }
 
 // ========================================================================
@@ -632,7 +634,7 @@ ul {
     max-height: vars.$spacing-unit-small * 11;
   }
 
-  button#secondary {
+  button#tuning-selector {
     margin-bottom: vars.$spacing-unit-large * 5;
     margin-top: vars.$spacing-unit-small * 6;
     font-size: vars.$spacing-unit-small * 6;

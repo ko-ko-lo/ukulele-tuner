@@ -3,12 +3,11 @@ import * as Tone from "tone";
 import "../../index.scss";
 import "../../styles/variables.scss";
 import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
-import { useTheme } from "../context/ThemeContext";
 import Modal from "../patterns/ModalTuning";
+import { ToneButton } from "../ui/button/ToneButton";
+import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
 
 const ManualTuner = () => {
-  const { theme } = useTheme();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [activeNote, setActiveNote] = useState<string | null>(null);
@@ -20,10 +19,6 @@ const ManualTuner = () => {
   const currentTuning = tuningOptions.find(
     (option) => option.id === selectedTuning
   )?.notes;
-
-  const selectedTuningName = tuningOptions.find(
-    (option) => option.id === selectedTuning
-  )?.name;
 
   const playNote = async (frequency: string) => {
     setActiveNote(frequency);
@@ -41,14 +36,11 @@ const ManualTuner = () => {
     <div>
       <h1>Press a button to guide your tuning.</h1>
 
-      <button id="secondary" onClick={() => setIsModalOpen(true)}>
-        {selectedTuningName}
-        <img
-          src={theme === "dark" ? "/arrow-down.svg" : "/arrow-down-light.svg"}
-          alt=""
-          className="arrow-icon"
-        />
-      </button>
+      <TuningSelectorButton
+        selectedTuning={selectedTuning}
+        tuningOptions={tuningOptions}
+        onClick={() => setIsModalOpen(true)}
+      />
 
       <Modal
         isOpen={isModalOpen}
@@ -69,14 +61,11 @@ const ManualTuner = () => {
                 }`}
                 key={frequency}
               >
-                <button
-                  className={`tone-button ${
-                    activeNote === frequency ? "active" : ""
-                  }`}
+                <ToneButton
+                  label={frequency.slice(0, 1)}
+                  isActive={activeNote === frequency}
                   onClick={() => playNote(frequency)}
-                >
-                  {frequency.slice(0, 1)}
-                </button>
+                />
               </div>
             ))}
         </div>
