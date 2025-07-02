@@ -1,6 +1,6 @@
-import "../../styles/variables.scss";
-import { useTheme } from "../context/ThemeContext";
-import { ThemeToggleButton } from "../ui/button/ThemeToggleButton";
+import { useTheme } from "../../context/ThemeContext";
+import { ThemeToggleButton } from "../../ui/button/ThemeToggleButton";
+import "./Footer.scss";
 
 const Footer: React.FC = () => {
   const { toggleTheme, theme } = useTheme();

@@ -14,8 +14,8 @@ import {
   isWithinNoteRange,
 } from "../audio/tuner/tunerHelpers";
 import { useMicAccess } from "../context/MicAccessContext";
-import AudioVisualizer from "../patterns/AudioVisualizer";
 import Modal from "../patterns/ModalTuning";
+import AudioVisualizer from "../patterns/audio-visualizer/AudioVisualizer";
 import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
 import { Toast } from "../ui/toast";
 

@@ -18,12 +18,13 @@
 ------------------------------------------------------------------ */
 
 import React from "react";
-import "../../index.scss";
-import "../../styles/variables.scss";
+import "../../../index.scss";
 import {
   TOLERANCE,
   noteFrequencies,
-} from "../audio/tuner/constants/note-frequencies";
+} from "../../audio/tuner/constants/note-frequencies";
+import { LinkButton } from "../../ui/button/LinkButton";
+import "./AudioVisualizer.scss";
 
 interface AudioVisualizerProps {
   // The musical note detected (e.g., "C4", "A4"). If null, no pitch is shown.
@@ -81,9 +82,9 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({
         {hasMicAccess === false ? (
           <>
             To use the tuner, please{" "}
-            <button className="as-link" onClick={onRequestMicAccess}>
+            <LinkButton onClick={onRequestMicAccess}>
               enable microphone access
-            </button>
+            </LinkButton>
             .
           </>
         ) : isTuned ? (

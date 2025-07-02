@@ -1,16 +1,8 @@
 @use "./styles/variables" as vars;
 
-.audio-bar {
-  width: 6px;
-  height: 24px;
-  background-color: #ddd;
-  margin: 0 2px;
-  transition: background-color 0.3s;
-
-  &.highlight {
-    background-color: var(--error-color); // or your preferred highlight
-  }
-}
+// ========================================================================
+// Global Styles
+// ========================================================================
 
 * {
   margin: 0;
@@ -197,14 +189,7 @@ button.theme-toggle-button img:hover {
 }
 
 // ========================================================================
-// Footer
-// ========================================================================
-footer {
-  display: flex;
-}
-
-// ========================================================================
-// Image
+// Images
 // ========================================================================
 img {
   max-width: 100%;
@@ -418,118 +403,6 @@ ul {
 }
 
 // ========================================================================
-// Audio Visualizer
-// ========================================================================
-#audio-visualizer {
-  margin-bottom: vars.$spacing-unit-large * 8;
-}
-
-.visualizer-container {
-  max-width: 885px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.audio-visualizer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-top: vars.$spacing-unit-large * 4;
-}
-
-.audio-bar {
-  width: vars.$spacing-unit-small;
-  height: vars.$spacing-unit-large * 9;
-  background-color: var(--audio-bar-color);
-  border-radius: vars.$radius-m;
-  transition: height 0.3s ease, background-color 0.3s ease;
-
-  &:first-child,
-  &:last-child {
-    height: vars.$spacing-unit-large * 15;
-    width: vars.$spacing-unit-small * 2;
-  }
-}
-
-.audio-center {
-  background-color: vars.$start-note-color;
-  border-radius: vars.$radius-full;
-  font-size: vars.$spacing-unit-large * 5;
-  color: vars.$background-color;
-  overflow: hidden;
-  padding: vars.$spacing-unit-large * 5 vars.$spacing-unit-large * 2;
-  //max-width: vars.$spacing-unit-large * 4;
-
-  &.active {
-    background-color: vars.$information-color;
-  }
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
-.audio-labels {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 885px;
-  font-size: vars.$spacing-unit-large * 3;
-  color: #88898a;
-  padding-top: vars.$spacing-unit-large * 4;
-
-  .too-low {
-    text-align: left;
-  }
-
-  .too-high {
-    text-align: right;
-  }
-
-  .too-low.highlight,
-  .too-high.highlight {
-    color: vars.$error-color;
-  }
-}
-
-.audio-center.tuned {
-  background-color: vars.$success-color;
-}
-
-.audio-center.tuned {
-  background-color: #d4edda;
-  border: 2px solid #28a745;
-  box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
-  transition: all 0.3s ease;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
-  }
-}
-
-.audio-center.tuned {
-  animation: pulse 1.5s infinite;
-}
-
-.success-message {
-  color: vars.$success-color;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-// ========================================================================
 // Others
 // ========================================================================
 .hidden {
@@ -625,25 +498,10 @@ ul {
     right: 0;
   }
 
-  .audio-labels {
-    font-size: vars.$spacing-unit-small * 9;
-    padding-top: vars.$spacing-unit-large * 2;
-  }
-
-  .audio-center img {
-    max-height: vars.$spacing-unit-small * 11;
-  }
-
   button#tuning-selector {
     margin-bottom: vars.$spacing-unit-large * 5;
     margin-top: vars.$spacing-unit-small * 6;
     font-size: vars.$spacing-unit-small * 6;
-  }
-
-  .audio-center {
-    //width: vars.$spacing-unit-large * 7;
-    //height: vars.$spacing-unit-large * 10;
-    font-size: vars.$spacing-unit-large * 4;
   }
 
   .toast {
@@ -651,14 +509,5 @@ ul {
     transform: translateX(-0%);
     margin-left: vars.$spacing-unit-large * 2;
     margin-right: vars.$spacing-unit-large * 2;
-  }
-
-  .audio-bar {
-    width: 1px;
-
-    &:first-child,
-    &:last-child {
-      width: vars.$spacing-unit-small;
-    }
   }
 }
