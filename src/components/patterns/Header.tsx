@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import "../index.scss";
-import "../styles/variables.scss";
-import { useTheme } from "./ThemeContext";
+import "../../index.scss";
+import "../../styles/variables.scss";
+import { useTheme } from "../context/ThemeContext";
 
 const Header: React.FC = () => {
   const { theme } = useTheme();
-  // React.FC means "React Functional Component"
   return (
     <header>
       <NavLink to="/">

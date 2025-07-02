@@ -4,11 +4,11 @@ import "@fontsource/comfortaa/500.css";
 import "@fontsource/comfortaa/600.css";
 import "@fontsource/comfortaa/700.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import AutoTuner from "./components/pages/AutoTuner";
+import ManualTuner from "./components/pages/ManualTuner";
+import Footer from "./components/patterns/Footer";
+import Header from "./components/patterns/Header";
 import "./index.scss";
-import AutoTuner from "./pages/AutoTuner";
-import ManualTuner from "./pages/ManualTuner";
 import "./styles/variables.scss";
 
 const App = () => {

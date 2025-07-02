@@ -1,5 +1,5 @@
-import "../styles/variables.scss";
-import { useTheme } from "./ThemeContext";
+import "../../styles/variables.scss";
+import { useTheme } from "../context/ThemeContext";
 
 const Footer: React.FC = () => {
   const { toggleTheme, theme } = useTheme();

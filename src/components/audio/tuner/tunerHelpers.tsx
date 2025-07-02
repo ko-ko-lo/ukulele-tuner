@@ -1,4 +1,4 @@
-import { noteFrequencies } from "../constants/note-frequencies";
+import { noteFrequencies } from "./constants/note-frequencies";
 
 export const isWithinNoteRange = (note: string, frequency: number): boolean => {
   const target = noteFrequencies[note];

@@ -1,7 +1,7 @@
 import React from "react";
-import { tuningOptions } from "../constants/tuningOptions";
-import "../index.scss";
-import "../styles/variables.scss";
+import "../../index.scss";
+import "../../styles/variables.scss";
+import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
 
 interface ModalProps {
   isOpen: boolean;

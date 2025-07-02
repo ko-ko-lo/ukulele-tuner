@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
-import AudioVisualizer from "../components/AudioVisualizer";
-import { useMicAccess } from "../components/MicAccessContext";
-import ModalTuning from "../components/ModalTuning";
-import { useTheme } from "../components/ThemeContext";
-import TonePitchDetector from "../components/TonePitchDetector";
+import "../../index.scss";
+import "../../styles/variables.scss";
+import TonePitchDetector from "../audio/TonePitchDetector";
+import {
+  TOLERANCE,
+  noteFrequencies,
+} from "../audio/tuner/constants/note-frequencies";
+import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
 import {
   calculateAverageFrequency,
   getTuningFrequenciesFor,
   isStablePitch,
   isWithinNoteRange,
-} from "../components/tunerHelpers";
-import { TOLERANCE, noteFrequencies } from "../constants/note-frequencies";
-import { tuningOptions } from "../constants/tuningOptions";
-import "../index.scss";
-import "../styles/variables.scss";
+} from "../audio/tuner/tunerHelpers";
+import { useMicAccess } from "../context/MicAccessContext";
+import { useTheme } from "../context/ThemeContext";
+import AudioVisualizer from "../patterns/AudioVisualizer";
+import ModalTuning from "../patterns/ModalTuning";
 
 const AutoTuner = () => {
   const [isTuningModalOpen, setIsTuningModalOpen] = useState(false);

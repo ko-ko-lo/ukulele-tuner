@@ -18,9 +18,12 @@
 ------------------------------------------------------------------ */
 
 import React from "react";
-import { TOLERANCE, noteFrequencies } from "../constants/note-frequencies";
-import "../index.scss";
-import "../styles/variables.scss";
+import "../../index.scss";
+import "../../styles/variables.scss";
+import {
+  TOLERANCE,
+  noteFrequencies,
+} from "../audio/tuner/constants/note-frequencies";
 
 interface AudioVisualizerProps {
   // The musical note detected (e.g., "C4", "A4"). If null, no pitch is shown.

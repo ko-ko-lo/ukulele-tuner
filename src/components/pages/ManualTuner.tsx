@@ -1,10 +1,10 @@
 import { useState } from "react";
 import * as Tone from "tone";
-import Modal from "../components/ModalTuning";
-import { useTheme } from "../components/ThemeContext";
-import { tuningOptions } from "../constants/tuningOptions";
-import "../index.scss";
-import "../styles/variables.scss";
+import "../../index.scss";
+import "../../styles/variables.scss";
+import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
+import { useTheme } from "../context/ThemeContext";
+import Modal from "../patterns/ModalTuning";
 
 const ManualTuner = () => {
   const { theme } = useTheme();
