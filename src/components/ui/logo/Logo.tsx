@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
+import "./Logo.scss";
 
 export function Logo() {
   const { theme } = useTheme();

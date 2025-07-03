@@ -11,13 +11,13 @@
 
 html,
 body {
-  height: 100%; /* Ensure the height of the viewport is taken up */
+  height: 100%;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Full viewport height */
+  min-height: 100vh;
 }
 
 main {
@@ -25,7 +25,7 @@ main {
 }
 
 html {
-  font-size: 16px; // 1rem = 16px
+  font-size: 16px;
   max-width: vars.$max-width;
   padding: 0 vars.$global-pd-desktop;
 }
@@ -35,6 +35,11 @@ body {
   font-weight: vars.$font-weight-regular;
   color: var(--text-color);
   background-color: var(--background-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 // ========================================================================
@@ -73,178 +78,12 @@ p {
 // ========================================================================
 // Button
 // ========================================================================
-
 button {
   font-family: vars.$font-primary;
   font-weight: vars.$font-weight-semiBold;
   font-size: vars.$spacing-unit-large * 2;
   padding: vars.$spacing-unit-small * 7 vars.$spacing-unit-large * 4;
-  color: var(--button-color);
   border: none;
-  border-radius: vars.$radius-s;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-
-  /*
-  &:focus {
-    outline: 2px solid vars.$sky-blue-50;
-  }
-  */
-}
-
-button#tuning-selector {
-  // Dropdown-Button
-  background-color: transparent;
-  box-shadow: none;
-  color: var(--text-color);
-  margin: vars.$spacing-unit-large * 4 auto vars.$spacing-unit-large * 8;
-  font-weight: vars.$font-weight-regular;
-  padding: 0;
-  text-align: center;
-  display: block;
-}
-
-button.btn-secondary {
-  background-color: transparent;
-  box-shadow: none;
-  box-shadow: inset 0 0 0 2px var(--button-boxshadow);
-  color: var(--button2-color);
-  margin-top: vars.$spacing-unit-large * 2;
-
-  &:hover {
-    color: var(--button-color);
-    background-color: var(--button-hover);
-  }
-}
-
-.as-link {
-  background: none;
-  border: none;
-  color: var(--heading3-color);
-  text-decoration: underline;
-  cursor: pointer;
-  font: inherit;
-  padding: 0;
-
-  &:hover {
-    background-color: transparent;
-    color: var(--heading-color);
-  }
-}
-
-.arrow-icon {
-  margin-left: vars.$spacing-unit-large;
-  vertical-align: middle;
-}
-
-// ========================================================================
-// Header
-// ========================================================================
-nav {
-  background-color: rgba(135, 206, 235, 0.3);
-  border-radius: vars.$radius-full;
-  justify-content: right;
-  display: inline-flex;
-
-  a {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 3;
-    font-size: vars.$spacing-unit-small * 7;
-
-    &.active {
-      color: var(--nav-active-color);
-      background-color: var(--nav-active-bg);
-      border-radius: vars.$radius-full;
-    }
-  }
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: vars.$spacing-unit-large * 3 0;
-}
-
-header img {
-  max-height: vars.$spacing-unit-large * 7;
-}
-
-// ========================================================================
-// Theme Toggle Button
-// ========================================================================
-button.theme-toggle-button {
-  margin: vars.$spacing-unit-large * 4 0 vars.$spacing-unit-large * 4 auto;
-  background-color: transparent;
-}
-
-button.theme-toggle-button img {
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-button.theme-toggle-button img:hover {
-  transform: scale(1.1);
-}
-
-// ========================================================================
-// Images
-// ========================================================================
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-// ========================================================================
-// Modal for Tuning Options
-// ========================================================================
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(5, 23, 31, 0.9);
-  backdrop-filter: blur(2px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: var(--modal-content-bg);
-  padding: vars.$spacing-unit-large * 10 vars.$spacing-unit-large * 15
-    vars.$spacing-unit-large * 15;
-  border-radius: vars.$radius-m;
-  position: relative;
-  max-width: 507px;
-  text-align: center;
-}
-
-.modal-close {
-  position: absolute;
-  top: vars.$spacing-unit-small * 3;
-  right: vars.$spacing-unit-small * 3;
-  background: none;
-  border: none;
-  font-size: vars.$spacing-unit-large * 4;
-  font-weight: vars.$font-weight-regular;
-  cursor: pointer;
-  color: vars.$sky-blue-700;
-}
-
-.modal-close:hover {
-  color: vars.$sky-blue-500;
-}
-
-button.modal-close:hover {
-  background-color: transparent;
-}
-
-button.modal-close {
-  box-shadow: none;
 }
 
 // ========================================================================
@@ -259,146 +98,8 @@ ul {
   align-items: center;
   gap: calc(vars.$spacing-unit-large * 5);
 
-  .tuning-option {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
-    border-radius: vars.$radius-m;
-    transition: background-color 0.2s, color 0.2s;
-    text-align: center;
-    color: inherit;
-
-    h3 {
-      color: #f9c99f;
-      padding-bottom: vars.$spacing-unit-large;
-      transition: color 0.2s;
-    }
-
-    p {
-      letter-spacing: 1px;
-      transition: color 0.2s;
-    }
-
-    &:hover {
-      background-color: vars.$sky-blue-400;
-
-      h3,
-      p {
-        color: vars.$sky-blue-950;
-      }
-    }
-  }
   button {
     box-shadow: none;
-  }
-}
-
-// ========================================================================
-// Manual Tuner
-// ========================================================================
-.manual-tuner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .tone-lines {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: vars.$spacing-unit-large * 10;
-
-    .tone-line {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      &::before,
-      &::after {
-        content: "";
-        width: 3px;
-        background-color: var(--strings-color);
-        transition: background-color 0.3s;
-      }
-
-      &:hover::before,
-      &:hover::after {
-        background-color: var(--strings-color);
-        opacity: 0.8;
-      }
-
-      &.active::before,
-      &.active::after {
-        background-color: rgba(118, 200, 147, 0.6);
-      }
-
-      &::before {
-        height: vars.$spacing-unit-large * 10;
-        border-top-left-radius: vars.$radius-full;
-        border-top-right-radius: vars.$radius-full;
-      }
-
-      &::after {
-        height: vars.$spacing-unit-large * 25;
-        border-bottom-left-radius: vars.$radius-full;
-        border-bottom-right-radius: vars.$radius-full;
-      }
-
-      .tone-button {
-        background-color: var(--tone-button-color);
-        border: none;
-        border-radius: vars.$radius-full;
-        padding: vars.$spacing-unit-large * 4 vars.$spacing-unit-large * 3;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        font-size: vars.$spacing-unit-large * 5;
-
-        &:hover {
-          background-color: var(--tone-button-hover);
-        }
-
-        &.active {
-          background-color: vars.$success-color;
-        }
-      }
-    }
-  }
-}
-
-// ========================================================================
-// Messages
-// ========================================================================
-.toast {
-  background-color: vars.$success-color;
-  padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-large * 4;
-  color: vars.$background-color;
-  border-radius: vars.$radius-full;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: vars.$spacing-unit-large * 8;
-  position: fixed;
-  z-index: 1000;
-  animation: fadeOut 4s forwards;
-  text-align: center;
-
-  &.success {
-    background-color: vars.$success-color;
-  }
-
-  &.error {
-    background-color: vars.$error-color;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
   }
 }
 
@@ -412,18 +113,9 @@ ul {
 }
 
 // ========================================================================
-// Responsive Design
+// Responsive Styles
 // ========================================================================
 @media (max-width: vars.$breakpoint-tablet) {
-  nav,
-  header {
-    flex-wrap: wrap;
-  }
-
-  header {
-    gap: vars.$spacing-unit-large;
-  }
-
   html {
     padding: 0 vars.$global-pd-tablet;
   }
@@ -436,24 +128,11 @@ ul {
   h3 {
     font-size: vars.$spacing-unit-small * 10;
   }
-
-  .modal-content {
-    margin: vars.$spacing-unit-large * 2;
-  }
 }
 
 @media (max-width: vars.$breakpoint-mobile) {
   html {
     padding: 0 vars.$global-pd-mobile;
-  }
-
-  header img {
-    max-height: vars.$spacing-unit-large * 4;
-  }
-
-  nav a {
-    font-size: vars.$spacing-unit-small * 6;
-    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
   }
 
   h1,
@@ -464,50 +143,5 @@ ul {
 
   h3 {
     font-size: vars.$spacing-unit-small * 9;
-  }
-
-  .manual-tuner .tone-lines .tone-line .tone-button {
-    font-size: vars.$spacing-unit-large * 4;
-    padding: vars.$spacing-unit-small * 9 vars.$spacing-unit-large * 2;
-  }
-
-  .manual-tuner .tone-lines {
-    gap: vars.$spacing-unit-large * 4;
-  }
-
-  .manual-tuner .tone-lines .tone-line::before,
-  .manual-tuner .tone-lines .tone-line::after {
-    width: vars.$spacing-unit-small;
-  }
-
-  .manual-tuner .tone-lines .tone-line::before {
-    height: vars.$spacing-unit-large * 6;
-  }
-
-  .manual-tuner .tone-lines .tone-line::after {
-    height: vars.$spacing-unit-large * 16;
-  }
-
-  .modal-content {
-    padding: vars.$spacing-unit-large * 8 vars.$spacing-unit-large * 5
-      vars.$spacing-unit-large * 8;
-  }
-
-  .modal-close {
-    top: 0;
-    right: 0;
-  }
-
-  button#tuning-selector {
-    margin-bottom: vars.$spacing-unit-large * 5;
-    margin-top: vars.$spacing-unit-small * 6;
-    font-size: vars.$spacing-unit-small * 6;
-  }
-
-  .toast {
-    left: 0%;
-    transform: translateX(-0%);
-    margin-left: vars.$spacing-unit-large * 2;
-    margin-right: vars.$spacing-unit-large * 2;
   }
 }

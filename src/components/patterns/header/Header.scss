@@ -1,0 +1,18 @@
+@use "../../../styles/variables.scss" as vars;
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: vars.$spacing-unit-large * 3 0;
+}
+
+@media (max-width: vars.$breakpoint-tablet) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  header {
+    gap: vars.$spacing-unit-large;
+  }
+}

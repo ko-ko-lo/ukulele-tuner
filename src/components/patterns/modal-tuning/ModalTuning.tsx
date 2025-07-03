@@ -1,9 +1,9 @@
 import React from "react";
-import "../../index.scss";
-import "../../styles/variables.scss";
-import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
-import { ModalCloseButton } from "../ui/button/ModalCloseButton";
-import { TuningOptionButton } from "../ui/button/TuningOptionButton";
+import "../../../index.scss";
+import { tuningOptions } from "../../audio/tuner/constants/tuningOptions";
+import { ModalCloseButton } from "../../ui/button/modal-close-button/ModalCloseButton";
+import { TuningOptionButton } from "../../ui/button/tuning-option-button/TuningOptionButton";
+import "./ModalTuning.scss";
 
 interface ModalProps {
   isOpen: boolean;

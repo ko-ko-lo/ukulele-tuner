@@ -1,4 +1,5 @@
 import React from "react";
+import "./ToneButton.scss";
 
 type ToneButtonProps = {
   label: string;

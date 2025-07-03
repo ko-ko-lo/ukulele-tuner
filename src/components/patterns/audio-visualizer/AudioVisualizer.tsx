@@ -23,7 +23,7 @@ import {
   TOLERANCE,
   noteFrequencies,
 } from "../../audio/tuner/constants/note-frequencies";
-import { LinkButton } from "../../ui/button/LinkButton";
+import { LinkButton } from "../../ui/button/link-button/LinkButton";
 import "./AudioVisualizer.scss";
 
 interface AudioVisualizerProps {

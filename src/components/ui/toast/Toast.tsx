@@ -1,3 +1,5 @@
+import "./Toast.scss";
+
 type ToastProps = {
   message: string;
   type?: "success" | "error";

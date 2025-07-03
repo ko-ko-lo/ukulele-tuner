@@ -1,4 +1,4 @@
-import "../../../index.scss";
+import "./TuningOptionButton.scss";
 
 type Props = {
   name: string;

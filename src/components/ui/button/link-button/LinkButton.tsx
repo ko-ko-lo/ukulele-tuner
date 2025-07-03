@@ -1,3 +1,5 @@
+import "./LinkButton.scss";
+
 type LinkButtonProps = {
   children: React.ReactNode;
   onClick: () => void;

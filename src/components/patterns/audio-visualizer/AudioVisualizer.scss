@@ -1,19 +1,5 @@
 @use "./../../../styles/variables" as vars;
 
-/*
-.audio-bar {
-  width: 6px;
-  height: 24px;
-  background-color: #ddd;
-  margin: 0 2px;
-  transition: background-color 0.3s;
-
-  &.highlight {
-    background-color: var(--error-color);
-  }
-}
-*/
-
 #audio-visualizer {
   margin-bottom: vars.$spacing-unit-large * 8;
 }

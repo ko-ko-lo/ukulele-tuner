@@ -1,5 +1,5 @@
 import { useTheme } from "../../context/ThemeContext";
-import { ThemeToggleButton } from "../../ui/button/ThemeToggleButton";
+import { ThemeToggleButton } from "../../ui/button/theme-toggle-button/ThemeToggleButton";
 import "./Footer.scss";
 
 const Footer: React.FC = () => {

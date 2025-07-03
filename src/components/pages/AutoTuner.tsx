@@ -13,10 +13,10 @@ import {
 } from "../audio/tuner/tunerHelpers";
 import { useMicAccess } from "../context/MicAccessContext";
 import { MicPermissionManager } from "../context/MicPermissionManager";
-import Modal from "../patterns/ModalTuning";
 import AudioVisualizer from "../patterns/audio-visualizer/AudioVisualizer";
-import { Toast } from "../ui/Toast";
-import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
+import Modal from "../patterns/modal-tuning/ModalTuning";
+import { TuningSelectorButton } from "../ui/button/tuning-selector-button/TuningSelectorButton";
+import { Toast } from "../ui/toast/Toast";
 
 const AutoTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

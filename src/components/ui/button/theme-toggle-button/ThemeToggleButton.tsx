@@ -1,3 +1,5 @@
+import "./ThemeToggleButton.scss";
+
 type Props = {
   theme: "light" | "dark";
   onToggle: () => void;

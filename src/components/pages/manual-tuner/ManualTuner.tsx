@@ -1,11 +1,12 @@
 import { useState } from "react";
 import * as Tone from "tone";
-import "../../index.scss";
-import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
-import Modal from "../patterns/ModalTuning";
-import { ToneButton } from "../ui/button/ToneButton";
-import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
-import { ToneLines } from "../ui/tone-lines/ToneLines";
+import "../../../index.scss";
+import { tuningOptions } from "../../audio/tuner/constants/tuningOptions";
+import Modal from "../../patterns/modal-tuning/ModalTuning";
+import { ToneButton } from "../../ui/button/tone-button/ToneButton";
+import { TuningSelectorButton } from "../../ui/button/tuning-selector-button/TuningSelectorButton";
+import { ToneLines } from "../../ui/tone-lines/ToneLines";
+import "./ManualTuner.scss";
 
 const ManualTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
