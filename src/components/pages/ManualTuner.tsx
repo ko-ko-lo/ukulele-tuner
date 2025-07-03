@@ -1,11 +1,11 @@
 import { useState } from "react";
 import * as Tone from "tone";
 import "../../index.scss";
-import "../../styles/variables.scss";
 import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
 import Modal from "../patterns/ModalTuning";
 import { ToneButton } from "../ui/button/ToneButton";
 import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
+import { ToneLines } from "../ui/tone-lines/ToneLines";
 
 const ManualTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +15,6 @@ const ManualTuner = () => {
   // Tracks the id of the currently active tuning
   const [selectedTuning, setSelectedTuning] = useState("standard");
 
-  // Reflects the currently selected tuning
   const currentTuning = tuningOptions.find(
     (option) => option.id === selectedTuning
   )?.notes;
@@ -55,18 +54,13 @@ const ManualTuner = () => {
         <div className="tone-lines">
           {currentTuning &&
             currentTuning.map((frequency) => (
-              <div
-                className={`tone-line ${
-                  activeNote === frequency ? "active" : ""
-                }`}
-                key={frequency}
-              >
+              <ToneLines key={frequency} isActive={activeNote === frequency}>
                 <ToneButton
                   label={frequency.slice(0, 1)}
                   isActive={activeNote === frequency}
                   onClick={() => playNote(frequency)}
                 />
-              </div>
+              </ToneLines>
             ))}
         </div>
       </div>

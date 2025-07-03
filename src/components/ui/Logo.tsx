@@ -8,7 +8,7 @@ export function Logo() {
 
   return (
     <NavLink to="/" aria-label="Homepage">
-      <img src={logoSrc} alt="Aloha logo" />
+      <img src={logoSrc} alt="Aloha Tune logo" />
     </NavLink>
   );
 }

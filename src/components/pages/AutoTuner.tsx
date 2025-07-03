@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../../index.scss";
-import "../../styles/variables.scss";
 import TonePitchDetector from "../audio/TonePitchDetector";
 import {
   TOLERANCE,
@@ -11,13 +10,13 @@ import {
   calculateAverageFrequency,
   getTuningFrequenciesFor,
   isStablePitch,
-  isWithinNoteRange,
 } from "../audio/tuner/tunerHelpers";
 import { useMicAccess } from "../context/MicAccessContext";
+import { MicPermissionManager } from "../context/MicPermissionManager";
 import Modal from "../patterns/ModalTuning";
 import AudioVisualizer from "../patterns/audio-visualizer/AudioVisualizer";
+import { Toast } from "../ui/Toast";
 import { TuningSelectorButton } from "../ui/button/TuningSelectorButton";
-import { Toast } from "../ui/toast";
 
 const AutoTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,19 +61,6 @@ const AutoTuner = () => {
     if (
       pitchData.note &&
       pitchData.frequency &&
-      pitchData.frequency > 100 &&
-      isWithinNoteRange(pitchData.note, pitchData.frequency)
-    ) {
-      // Proceed with smoothing and tuning logic
-    } else {
-      // Invalid input — wipe state to prevent false positives
-      setTunedTimestamp(null);
-      setIsTuned(false);
-    }
-
-    if (
-      pitchData.note &&
-      pitchData.frequency &&
       pitchData.frequency > MIN_VALID_FREQUENCY &&
       Object.keys(tuningFrequencies).includes(pitchData.note)
     ) {
@@ -114,6 +100,16 @@ const AutoTuner = () => {
   };
 
   useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
+
+  useEffect(() => {
     if (isTuned) {
       const timeout = setTimeout(() => {
         setIsTuned(false);
@@ -140,34 +136,6 @@ const AutoTuner = () => {
     return () => clearInterval(interval);
   }, [lastDetectionTime]);
 
-  useEffect(() => {
-    const checkMicPermissions = async () => {
-      try {
-        const status = await navigator.permissions.query({
-          name: "microphone" as PermissionName,
-        });
-
-        if (status.state === "granted") {
-          setHasMicAccess(true);
-        } else if (status.state === "denied") {
-          setHasMicAccess(false);
-        } else {
-          try {
-            await navigator.mediaDevices.getUserMedia({ audio: true });
-            setHasMicAccess(true);
-          } catch {
-            setHasMicAccess(false);
-          }
-        }
-      } catch (err) {
-        console.error("Error checking microphone permissions:", err);
-        setHasMicAccess(false);
-      }
-    };
-
-    checkMicPermissions();
-  }, [setHasMicAccess]);
-
   const requestMicAccess = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -181,6 +149,7 @@ const AutoTuner = () => {
 
   return (
     <div className="centered-container">
+      <MicPermissionManager />
       <h1>Let's Get Your Ukulele in Tune!</h1>
 
       <TuningSelectorButton

@@ -2,6 +2,8 @@ import React from "react";
 import "../../index.scss";
 import "../../styles/variables.scss";
 import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
+import { ModalCloseButton } from "../ui/button/ModalCloseButton";
+import { TuningOptionButton } from "../ui/button/TuningOptionButton";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,21 +23,17 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          ×
-        </button>
+        <ModalCloseButton onClick={onClose} />
+
         <ul>
           {tuningOptions.map((option) => (
             <li key={option.id}>
-              <button
+              <TuningOptionButton
+                name={option.name}
+                notes={option.notes}
+                isSelected={option.id === selectedTuning}
                 onClick={() => onSelectTuning(option.id)}
-                className={`tuning-option${
-                  option.id === selectedTuning ? " selected" : ""
-                }`}
-              >
-                <h3>{option.name}</h3>
-                <p>{option.notes.join(" - ")}</p>
-              </button>
+              />
             </li>
           ))}
         </ul>
