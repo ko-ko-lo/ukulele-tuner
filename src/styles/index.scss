@@ -1,4 +1,5 @@
-@use "./styles/variables" as vars;
+@use "./variables" as vars;
+@use "./themes.scss" as *;
 
 // ========================================================================
 // Global Styles
@@ -49,19 +50,20 @@ h1,
 h2,
 h3 {
   font-weight: vars.$font-weight-medium;
-  color: var(--heading-color);
   text-align: center;
 }
 
 h1 {
   font-size: vars.$spacing-unit-large * 5;
   padding-top: vars.$spacing-unit-large * 5;
+  color: var(--heading-color);
   margin: 0;
 }
 
 h2 {
   font-size: vars.$spacing-unit-large * 4;
   margin-bottom: vars.$spacing-unit-large * 3;
+  color: var(--heading-color);
 }
 
 h3 {

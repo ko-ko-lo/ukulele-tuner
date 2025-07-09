@@ -18,7 +18,7 @@
 ------------------------------------------------------------------ */
 
 import React from "react";
-import "../../../index.scss";
+import "../../../styles/index.scss";
 import {
   TOLERANCE,
   noteFrequencies,

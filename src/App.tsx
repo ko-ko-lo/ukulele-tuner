@@ -8,7 +8,7 @@ import AutoTuner from "./components/pages/AutoTuner";
 import ManualTuner from "./components/pages/manual-tuner/ManualTuner";
 import Footer from "./components/patterns/footer/Footer";
 import Header from "./components/patterns/header/Header";
-import "./index.scss";
+import "./styles/index.scss";
 import "./styles/variables.scss";
 
 const App = () => {

@@ -1,0 +1,76 @@
+@use "./variables" as vars;
+
+// ========================================================================
+// Light & Dark Mode
+// ========================================================================
+$dark-theme: (
+  background-color: vars.$background-color,
+  text-color: vars.$sky-blue-100,
+  text-color-inverted: vars.$background-color,
+  heading-color: vars.$sandy-beige-100,
+  heading3-color: vars.$sandy-beige-300,
+  button-color: vars.$background-color,
+  button-hover: vars.$sky-blue-200,
+  button2-color: vars.$sky-blue-50,
+  button-manual-tuner: vars.$sky-blue-400,
+  strings-color: rgba(vars.$sky-blue-200, 0.6),
+  tone-button-color: vars.$sky-blue-400,
+  tone-button-hover: vars.$sandy-beige-100,
+  modal-content-bg: vars.$sky-blue-900,
+  audio-bar-color: vars.$sky-blue-200,
+  audio-labels: rgba(vars.$sandy-beige-50, 0.6),
+  button-boxshadow: vars.$sky-blue-300,
+  nav-active-bg: vars.$sky-blue-500,
+  nav-active-color: vars.$background-color,
+  information-color: vars.$sandy-beige-300,
+  error-color: vars.$soft-pink-500,
+  success-color: vars.$green-light,
+);
+
+$light-theme: (
+  background-color: vars.$sandy-beige-50,
+  text-color: vars.$sandy-beige-950,
+  text-color-inverted: vars.$sandy-beige-50,
+  heading-color: vars.$sandy-beige-900,
+  heading3-color: vars.$sandy-beige-800,
+  button-color: vars.$sandy-beige-50,
+  button-hover: vars.$sky-blue-700,
+  button2-color: vars.$sky-blue-950,
+  button-manual-tuner: vars.$sky-blue-900,
+  strings-color: rgba(vars.$sky-blue-900, 0.4),
+  tone-button-color: vars.$sky-blue-900,
+  tone-button-hover: vars.$sky-blue-800,
+  modal-content-bg: vars.$sandy-beige-100,
+  audio-bar-color: vars.$sky-blue-900,
+  audio-labels: rgba(vars.$sandy-beige-900, 0.5),
+  button-boxshadow: vars.$sky-blue-800,
+  nav-active-bg: vars.$sky-blue-900,
+  nav-active-color: vars.$sandy-beige-50,
+  information-color: vars.$sandy-beige-500,
+  error-color: vars.$soft-pink-700,
+  success-color: vars.$green-dark,
+);
+
+body[data-theme="dark"] {
+  @each $key, $value in $dark-theme {
+    --#{$key}: #{$value};
+  }
+}
+
+body[data-theme="light"] {
+  @each $key, $value in $light-theme {
+    --#{$key}: #{$value};
+  }
+}
+
+// ========================================================================
+// Default theme
+// ========================================================================
+$theme: dark;
+
+// ========================================================================
+// Shared Colors
+// ========================================================================
+:root {
+  --start-note-color: vars.$soft-pink-500;
+}

@@ -1,4 +1,5 @@
 @use "../../../styles/variables.scss" as vars;
+@use "../../../styles/themes.scss";
 
 .tone-line {
   display: flex;
@@ -34,24 +35,6 @@
     height: vars.$spacing-unit-large * 25;
     border-bottom-left-radius: vars.$radius-full;
     border-bottom-right-radius: vars.$radius-full;
-  }
-
-  .tone-button {
-    background-color: var(--tone-button-color);
-    border: none;
-    border-radius: vars.$radius-full;
-    padding: vars.$spacing-unit-large * 4 vars.$spacing-unit-large * 3;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: vars.$spacing-unit-large * 5;
-
-    &:hover {
-      background-color: var(--tone-button-hover);
-    }
-
-    &.active {
-      background-color: vars.$success-color;
-    }
   }
 }
 

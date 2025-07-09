@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../index.scss";
+import "../../styles/index.scss";
 import TonePitchDetector from "../audio/TonePitchDetector";
 import {
   TOLERANCE,

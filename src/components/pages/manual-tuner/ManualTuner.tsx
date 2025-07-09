@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as Tone from "tone";
-import "../../../index.scss";
+import "../../../styles/index.scss";
 import { tuningOptions } from "../../audio/tuner/constants/tuningOptions";
 import Modal from "../../patterns/modal-tuning/ModalTuning";
 import { ToneButton } from "../../ui/button/tone-button/ToneButton";

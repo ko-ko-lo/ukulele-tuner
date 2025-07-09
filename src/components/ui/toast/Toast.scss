@@ -1,9 +1,10 @@
 @use "../../../styles/variables.scss" as vars;
+@use "../../../styles/themes.scss";
 
 .toast {
-  background-color: vars.$success-color;
+  background-color: var(--success-color);
   padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-large * 4;
-  color: vars.$background-color;
+  color: var(--text-color-inverted);
   border-radius: vars.$radius-full;
   left: 50%;
   transform: translateX(-50%);
@@ -14,11 +15,11 @@
   text-align: center;
 
   &.success {
-    background-color: vars.$success-color;
+    background-color: var(--success-color);
   }
 
   &.error {
-    background-color: vars.$error-color;
+    background-color: var(--error-color);
   }
 }
 

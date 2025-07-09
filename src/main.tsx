@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { MicAccessProvider } from "./components/context/MicAccessContext.tsx";
 import { ThemeProvider } from "./components/context/ThemeContext.tsx";
-import "./index.scss";
+import "./styles/index.scss";
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

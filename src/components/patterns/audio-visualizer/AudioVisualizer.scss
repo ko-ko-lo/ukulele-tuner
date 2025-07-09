@@ -1,4 +1,5 @@
 @use "./../../../styles/variables" as vars;
+@use "./../../../styles/themes.scss" as *;
 
 #audio-visualizer {
   margin-bottom: vars.$spacing-unit-large * 8;
@@ -48,7 +49,7 @@
   padding: vars.$spacing-unit-large * 5 vars.$spacing-unit-large * 2;
 
   &.active {
-    background-color: vars.$information-color;
+    background-color: var(--information-color);
   }
 
   img {
@@ -62,7 +63,7 @@
   width: 100%;
   max-width: 885px;
   font-size: vars.$spacing-unit-large * 3;
-  color: #88898a;
+  color: var(--audio-labels);
   padding-top: vars.$spacing-unit-large * 4;
 
   .too-low {
@@ -75,12 +76,12 @@
 
   .too-low.highlight,
   .too-high.highlight {
-    color: vars.$error-color;
+    color: var(--error-color);
   }
 }
 
 .audio-center.tuned {
-  background-color: vars.$success-color;
+  background-color: var(--success-color);
 }
 
 .audio-center.tuned {
@@ -107,7 +108,7 @@
 }
 
 .success-message {
-  color: vars.$success-color;
+  color: var(--success-color);
   font-weight: bold;
   transition: color 0.3s ease;
 }
