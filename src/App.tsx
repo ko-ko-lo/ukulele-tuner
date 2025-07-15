@@ -4,10 +4,10 @@ import "@fontsource/comfortaa/500.css";
 import "@fontsource/comfortaa/600.css";
 import "@fontsource/comfortaa/700.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AutoTuner from "./components/pages/AutoTuner";
-import ManualTuner from "./components/pages/manual-tuner/ManualTuner";
-import Footer from "./components/patterns/footer/Footer";
-import Header from "./components/patterns/header/Header";
+import AutoTuner from "./pages/AutoTuner";
+import ManualTuner from "./pages/manual-tuner/ManualTuner";
+import Footer from "./patterns/footer/Footer";
+import Header from "./patterns/header/Header";
 import "./styles/index.scss";
 import "./styles/variables.scss";
 

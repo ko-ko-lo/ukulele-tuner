@@ -1,0 +1,45 @@
+@use "../../styles/variables.scss" as vars;
+@use "../../styles/themes.scss";
+
+.toast {
+  background-color: var(--success-color);
+  padding: vars.$spacing-unit-large * 2 vars.$spacing-unit-large * 4;
+  color: var(--text-color-inverted);
+  border-radius: vars.$radius-full;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: vars.$spacing-unit-large * 8;
+  position: fixed;
+  z-index: 1000;
+  animation: fadeOut 4s forwards;
+  text-align: center;
+
+  &.success {
+    background-color: var(--success-color);
+  }
+
+  &.error {
+    background-color: var(--error-color);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: vars.$breakpoint-mobile) {
+  .toast {
+    left: 0%;
+    transform: translateX(-0%);
+    margin-left: vars.$spacing-unit-large * 2;
+    margin-right: vars.$spacing-unit-large * 2;
+  }
+}

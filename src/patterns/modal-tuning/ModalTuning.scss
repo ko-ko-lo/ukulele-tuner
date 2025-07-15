@@ -1,0 +1,38 @@
+@use "../../styles/variables.scss" as vars;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 23, 31, 0.9);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--modal-content-bg);
+  padding: vars.$spacing-unit-large * 10 vars.$spacing-unit-large * 15
+    vars.$spacing-unit-large * 15;
+  border-radius: vars.$radius-m;
+  position: relative;
+  max-width: 507px;
+  text-align: center;
+}
+
+@media (max-width: vars.$breakpoint-tablet) {
+  .modal-content {
+    margin: vars.$spacing-unit-large * 2;
+  }
+}
+
+@media (max-width: vars.$breakpoint-mobile) {
+  .modal-content {
+    padding: vars.$spacing-unit-large * 8 vars.$spacing-unit-large * 5
+      vars.$spacing-unit-large * 8;
+  }
+}

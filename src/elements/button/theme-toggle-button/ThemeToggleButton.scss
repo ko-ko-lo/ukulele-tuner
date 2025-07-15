@@ -1,0 +1,15 @@
+@use "../../../styles/variables.scss" as vars;
+
+button.theme-toggle-button {
+  margin: vars.$spacing-unit-large * 4 0 vars.$spacing-unit-large * 4 auto;
+  background-color: transparent;
+}
+
+button.theme-toggle-button img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+button.theme-toggle-button img:hover {
+  transform: scale(1.1);
+}

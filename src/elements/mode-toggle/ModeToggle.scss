@@ -1,0 +1,35 @@
+@use "../../styles/variables.scss" as vars;
+@use "../../styles/themes.scss";
+
+nav {
+  background-color: rgba(135, 206, 235, 0.3);
+  border-radius: vars.$radius-full;
+  justify-content: right;
+  display: inline-flex;
+
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 3;
+    font-size: vars.$spacing-unit-small * 7;
+
+    &.active {
+      color: var(--nav-active-color);
+      background-color: var(--nav-active-bg);
+      border-radius: vars.$radius-full;
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-tablet) {
+  nav {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: vars.$breakpoint-mobile) {
+  nav a {
+    font-size: vars.$spacing-unit-small * 6;
+    padding: vars.$spacing-unit-large vars.$spacing-unit-large * 2;
+  }
+}
