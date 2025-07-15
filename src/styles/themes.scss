@@ -6,6 +6,7 @@
 $dark-theme: (
   background-color: vars.$background-color,
   text-color: vars.$sky-blue-100,
+  text-color-hover: vars.$sky-blue-300,
   text-color-inverted: vars.$background-color,
   heading-color: vars.$sandy-beige-100,
   heading3-color: vars.$sandy-beige-300,
@@ -30,6 +31,7 @@ $dark-theme: (
 $light-theme: (
   background-color: vars.$sandy-beige-50,
   text-color: vars.$sandy-beige-950,
+  text-color-hover: vars.$sandy-beige-800,
   text-color-inverted: vars.$sandy-beige-50,
   heading-color: vars.$sandy-beige-900,
   heading3-color: vars.$sandy-beige-800,

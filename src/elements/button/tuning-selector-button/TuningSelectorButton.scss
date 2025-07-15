@@ -11,6 +11,10 @@ button#tuning-selector {
   text-align: center;
   display: block;
   cursor: pointer;
+
+  &:hover {
+    color: var(--text-color-hover);
+  }
 }
 
 .arrow-icon {

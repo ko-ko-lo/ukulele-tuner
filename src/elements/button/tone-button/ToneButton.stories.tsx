@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ToneButton } from "./ToneButton";
 
 const meta = {
-  title: "Elements/Buttons/ToneButton",
+  title: "Elements/Buttons/Tone",
   component: ToneButton,
 } satisfies Meta<typeof ToneButton>;
 
@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Tone: Story = {
   args: {
     label: "C",
     isActive: false,
