@@ -12,7 +12,7 @@ interface ModalProps {
   selectedTuning: string;
 }
 
-const Modal: React.FC<ModalProps> = ({
+const ModalTuning: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   onSelectTuning,
@@ -42,4 +42,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default ModalTuning;

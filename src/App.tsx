@@ -4,10 +4,9 @@ import "@fontsource/comfortaa/500.css";
 import "@fontsource/comfortaa/600.css";
 import "@fontsource/comfortaa/700.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import AutoTuner from "./pages/AutoTuner";
+import { PageLayout } from "./layout/PageLayout";
+import AutoTuner from "./pages/auto-tuner/AutoTuner";
 import ManualTuner from "./pages/manual-tuner/ManualTuner";
-import Footer from "./patterns/footer/Footer";
-import Header from "./patterns/header/Header";
 import "./styles/index.scss";
 import "./styles/variables.scss";
 
@@ -15,14 +14,12 @@ const App = () => {
   return (
     <div id="root">
       <Router>
-        <Header />
-        <main>
+        <PageLayout>
           <Routes>
             <Route path="/" element={<AutoTuner />} />
             <Route path="/manual" element={<ManualTuner />} />
           </Routes>
-        </main>
-        <Footer />
+        </PageLayout>
       </Router>
     </div>
   );

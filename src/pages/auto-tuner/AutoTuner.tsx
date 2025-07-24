@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import TonePitchDetector from "../audio/TonePitchDetector";
+import TonePitchDetector from "../../audio/TonePitchDetector";
 import {
   TOLERANCE,
   noteFrequencies,
-} from "../audio/tuner/constants/note-frequencies";
-import { tuningOptions } from "../audio/tuner/constants/tuningOptions";
+} from "../../audio/tuner/constants/note-frequencies";
+import { tuningOptions } from "../../audio/tuner/constants/tuningOptions";
 import {
   calculateAverageFrequency,
   getTuningFrequenciesFor,
   isStablePitch,
-} from "../audio/tuner/tunerHelpers";
-import { useMicAccess } from "../context/MicAccessContext";
-import { MicPermissionManager } from "../context/MicPermissionManager";
-import { TuningSelectorButton } from "../elements/button/tuning-selector-button/TuningSelectorButton";
-import { Toast } from "../elements/toast/Toast";
-import AudioVisualizer from "../patterns/audio-visualizer/AudioVisualizer";
-import Modal from "../patterns/modal-tuning/ModalTuning";
-import "../styles/index.scss";
+} from "../../audio/tuner/tunerHelpers";
+import { useMicAccess } from "../../context/MicAccessContext";
+import { MicPermissionManager } from "../../context/MicPermissionManager";
+import { TuningSelectorButton } from "../../elements/button/tuning-selector-button/TuningSelectorButton";
+import { Toast } from "../../elements/toast/Toast";
+import AudioVisualizer from "../../patterns/audio-visualizer/AudioVisualizer";
+import ModalTuning from "../../patterns/modal-tuning/ModalTuning";
+import "../../styles/index.scss";
 
 const AutoTuner = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -170,7 +170,7 @@ const AutoTuner = () => {
         isTuned={isTuned}
       />
 
-      <Modal
+      <ModalTuning
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSelectTuning={(id) => {
